@@ -1,17 +1,11 @@
-import React, { useEffect, useRef, forwardRef } from 'react';
-import {Canvas, useFrame, useThree} from "@react-three/fiber";
+import {Canvas, useFrame} from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import Model from "../components/HometheaterSubwooffer.jsx";
 import Room from "../components/Room.jsx";
-import * as THREE from "three";
 
 
 //
 const Scene = (() => {
-    const {camera} = useThree();
-    const raycaster = useRef(new THREE.Raycaster());
-    const { pointer } = useThree();
-
 
     useFrame((state) => {
 
@@ -27,7 +21,7 @@ const Scene = (() => {
             x = (x - Math.sign(x) * deadzone) / (1 - deadzone)
         }
 
-        const targetZ = x * -1.4
+        const targetZ = x * -1.4;
 
         camera.position.z += (targetZ - camera.position.z) * 0.1
 
