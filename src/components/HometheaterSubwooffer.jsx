@@ -6,7 +6,7 @@ Command: npx gltfjsx@6.5.3 HometheaterSubwooffer.gltf
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
-function Model(props) {
+function Speaker(props) {
       const { nodes, materials } = useGLTF('/HometheaterSubwooffer.gltf')
   return (
     <group {...props} dispose={null}>
@@ -17,4 +17,4 @@ function Model(props) {
 
 useGLTF.preload('/HometheaterSubwooffer.gltf')
 
-export default Model
+export default Speaker
