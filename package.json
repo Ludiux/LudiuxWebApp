@@ -1,5 +1,6 @@
 {
-  "name": "personalwebapp",
+  "name": "ludiuxwebapp",
+  "homepage": "https://ludiux.github.io/LudiuxWebApp/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
