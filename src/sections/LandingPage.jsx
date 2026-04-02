@@ -4,9 +4,10 @@ import Speaker from "../components/HometheaterSubwooffer.jsx";
 import Room from "../components/Room.jsx";
 import Desk from "../components/Desk.jsx";
 import {useRef} from "react";
-import Monitor from "../components/Scene.jsx";
+import Monitor from "../components/Monitor.jsx";
 import Keyboard from "../components/Keyboard.jsx";
 import Mouse from "../components/Mouse.jsx";
+import Dell from "../components/Dell_computer_scan_lowpoly.jsx";
 
 
 
@@ -21,7 +22,6 @@ const Scene = (() => {
         if (Math.abs(x) < deadzone) {
             x = 0
         } else {
-            // reescalar para que no haya salto
             x = (x - Math.sign(x) * deadzone) / (1 - deadzone)
         }
         const baseZ = 0;
@@ -57,7 +57,6 @@ const MouseScene = (() => {
         let mX = 0.7 + (x * 0.3);
         let mY = 2.7 + (y * 0.35);
 
-        console.log(mY, mX)
         if (mouseRef.current) {
             mouseRef.current.position.x = mY;
             mouseRef.current.position.y = -0.223;
@@ -84,12 +83,13 @@ const LandingPage = () => {
                 <hemisphereLight />
                 <directionalLight  position={[-2, 2, 0]} />
                 <Scene />
+                <Dell scale={[0.5, 0.5, 0.5]} position={[2.8, -1.25, 1.73]} rotation={[0, 1.63, 0]}/>
                 <Keyboard scale={[0.025, 0.025, 0.025]} position={[2.6, -0.223, -0.8]} rotation={[0, -1.9, 0]} />
-                <Monitor position={[3, -0.22, -0.1]} rotation={[0, -1.55, 0]} />
+                <Monitor scale={[3, 3, 3]} position={[3, -0.22, -0.1]} rotation={[0, -1.55, 0]} />
                 <MouseScene />
-                <Desk scale={[1.37, 1.2, 1.37]} position={[2.7, -0.7, -0.15]} rotation={[0, -1.57, 0]}/>
+                <Desk scale={[1.37, 1.2, 1.37]} position={[2.75, -0.7, -0.15]} rotation={[0, -1.57, 0]}/>
                 <Speaker scale={[0.2, 0.2, 0.2]} position={[2.87, 0.1, -1.48]} />
-                <Room position={[0, -2, 0]} />
+                <Room position={[0, -2, 0.2]} />
             </Canvas>
         </div>
     );
