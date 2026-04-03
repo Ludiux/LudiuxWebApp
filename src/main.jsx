@@ -8,9 +8,12 @@ import InfoPage from "./sections/InfoPage.jsx"
 import { KeyboardControls } from "@react-three/drei"
 import { Controls } from "./components/Controls.jsx"
 
+
+
 const map = [
     { name: Controls.escape, keys: ["Escape"] },
 ]
+
 
 const router = createBrowserRouter([
     {
@@ -21,12 +24,14 @@ const router = createBrowserRouter([
             </KeyboardControls>
         )
     },
-    { path: '/embed', element: <InfoPage /> },
+    { path: '/embed', element:
+            <InfoPage /> },
     { path: "*", element: <NotFound /> },
 ])
 
 createRoot(document.getElementById('root')).render(
+
     <StrictMode>
-        <RouterProvider router={router} />
+            <RouterProvider router={router} />
     </StrictMode>
 )

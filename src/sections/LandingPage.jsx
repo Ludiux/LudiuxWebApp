@@ -1,13 +1,14 @@
 import {Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import Speaker from "../components/HometheaterSubwooffer.jsx";
-import Room from "../components/Room.jsx";
-import Desk from "../components/Desk.jsx";
+import Speaker from "../components/Models/HometheaterSubwooffer.jsx";
+import Room from "../components/Models/Room.jsx";
+import Desk from "../components/Models/Desk.jsx";
 import {useRef} from "react";
-import Monitor from "../components/Monitor.jsx";
-import Keyboard from "../components/Keyboard.jsx";
-import Mouse from "../components/Mouse.jsx";
-import Dell from "../components/Dell_computer_scan_lowpoly.jsx";
+import Monitor from "../components/Models/Monitor.jsx";
+import Keyboard from "../components/Models/Keyboard.jsx";
+import Mouse from "../components/Models/Mouse.jsx";
+import Dell from "../components/Models/Dell_computer_scan_lowpoly.jsx";
+import {Bloom, EffectComposer} from "@react-three/postprocessing";
 
 
 
@@ -82,6 +83,11 @@ const LandingPage = () => {
             >
                 <hemisphereLight />
                 <directionalLight  position={[-2, 2, 0]} />
+                <EffectComposer>
+                    <Bloom  intensity={1.5}      // strength of glow
+                            luminanceThreshold={0.2} // what glows
+                            luminanceSmoothing={0.9}/>
+                </EffectComposer>
                 <Scene />
                 <Dell scale={[0.5, 0.5, 0.5]} position={[2.8, -1.25, 1.73]} rotation={[0, 1.63, 0]}/>
                 <Keyboard scale={[0.025, 0.025, 0.025]} position={[2.6, -0.223, -0.8]} rotation={[0, -1.9, 0]} />
