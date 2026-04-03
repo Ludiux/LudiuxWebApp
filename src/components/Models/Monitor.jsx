@@ -17,9 +17,6 @@ function Monitor(props) {
     const zIndex = active ? -100 : 0
 
 
-
-
-
     useEffect(() => {
         if (escapePressed) {
             setActive(true)

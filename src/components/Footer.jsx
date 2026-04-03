@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 
 const Footer = () => {
-    const [active, setActive] = useState(true)
+    const [active, setActive] = useState(false)
     let color = !active ? "bg-[#333333]" : "bg-white";
-    let searchColor = !active ? "../../public/assets/media/img/searchGray.png" : "../../public/assets/media/img/search.png"
+    let searchColor = !active ? "../../assets/media/img/searchGray.png" : "../../assets/media/img/search.png"
     const textcolor = active
         ? "placeholder-black"
         : "placeholder-gray-300"
