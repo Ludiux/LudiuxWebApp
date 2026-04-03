@@ -1,5 +1,6 @@
 {
-  "name": "personalwebapp",
+  "name": "ludiuxwebapp",
+  "homepage": "https://ludiux.github.io/LudiuxWebApp/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,13 +8,16 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
     "@react-three/postprocessing": "^3.0.4",
     "@tailwindcss/vite": "^4.2.2",
+    "gh-pages": "^6.3.0",
     "leva": "^0.10.1",
     "maath": "^0.10.8",
     "postprocessing": "^6.39.0",
