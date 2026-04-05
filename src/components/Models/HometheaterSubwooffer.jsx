@@ -10,7 +10,7 @@ function Speaker(props) {
       const { nodes, materials } = useGLTF('/HometheaterSubwooffer.gltf')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Cube.geometry} material={materials.Material} scale={[2.1, 1.9, 1.4]} />
+      <mesh geometry={nodes.Cube.geometry} material={materials.Material} scale={[2.1, 1.9, 1.4]} castShadow receiveShadow/>
     </group>
   )
 }

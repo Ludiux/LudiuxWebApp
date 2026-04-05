@@ -12,13 +12,13 @@ function Mouse(props) {
     <group {...props} dispose={null}>
       <group position={[-0.002, 0, 0.004]}>
         <group position={[0.001, 0, -0.002]} rotation={[0, 1.57, 0]} scale={33.377}>
-          <mesh geometry={nodes.Plane004.geometry} material={materials['Rough Plastic Insigna color']} />
-          <mesh geometry={nodes.Plane004_1.geometry} material={materials.Color} />
-          <mesh geometry={nodes.Plane004_2.geometry} material={materials['Rough Plastic']} />
-          <mesh geometry={nodes.Plane004_3.geometry} material={materials['Rubber Wheel']} />
-          <mesh geometry={nodes.Plane004_4.geometry} material={materials['Rubber ']} />
-          <mesh geometry={nodes.Plane004_5.geometry} material={materials['Glossy Plastic']} />
-          <mesh geometry={nodes.Light_Mouse.geometry} material={materials.Color} position={[0, 0.022, -0.038]} rotation={[-0.475, 0, 0]} scale={0.008} />
+          <mesh geometry={nodes.Plane004.geometry} material={materials['Rough Plastic Insigna color']} castShadow receiveShadow/>
+          <mesh geometry={nodes.Plane004_1.geometry} material={materials.Color} castShadow receiveShadow/>
+          <mesh geometry={nodes.Plane004_2.geometry} material={materials['Rough Plastic']} castShadow receiveShadow/>
+          <mesh geometry={nodes.Plane004_3.geometry} material={materials['Rubber Wheel']} castShadow receiveShadow/>
+          <mesh geometry={nodes.Plane004_4.geometry} material={materials['Rubber ']} castShadow receiveShadow/>
+          <mesh geometry={nodes.Plane004_5.geometry} material={materials['Glossy Plastic']} castShadow receiveShadow/>
+          <mesh geometry={nodes.Light_Mouse.geometry} material={materials.Color} position={[0, 0.022, -0.038]} rotation={[-0.475, 0, 0]} scale={0.008} castShadow receiveShadow/>
         </group>
       </group>
       <mesh geometry={nodes.Cylinder.geometry} material={materials['Material.001']} position={[9.543, 0.185, 0.038]} rotation={[0, 0, -Math.PI / 2]} scale={[-0.028, -0.694, -0.024]} />

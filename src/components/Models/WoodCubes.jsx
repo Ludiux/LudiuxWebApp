@@ -8,8 +8,8 @@ function WoodCube(props) {
   return (
     <group {...props} dispose={null}>
       <group position={[0, 1.139, 0]} scale={[0.513, 1.139, 1.139]}>
-        <mesh geometry={nodes.Cube_1.geometry} material={materials['White Painted Wood']} />
-        <mesh geometry={nodes.Cube_2.geometry} material={materials['MDF Board']} />
+        <mesh geometry={nodes.Cube_1.geometry} material={materials.Material} castShadow receiveShadow />
+        <mesh geometry={nodes.Cube_2.geometry} material={materials['Material.002']} castShadow receiveShadow/>
       </group>
     </group>
   )

@@ -2,7 +2,7 @@ import LandingPage from "./sections/LandingPage.jsx";
 
 
 
-function App() {
+function App(close, setClose) {
   return (
     <>
         <LandingPage />

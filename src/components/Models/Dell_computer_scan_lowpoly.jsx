@@ -11,7 +11,7 @@ function Dell(props) {
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
-        <mesh geometry={nodes.Object_2.geometry} material={materials.DellComputer} position={[-0.092, -0.152, 0.906]} />
+        <mesh geometry={nodes.Object_2.geometry} material={materials.DellComputer} position={[-0.092, -0.152, 0.906]} castShadow receiveShadow/>
       </group>
     </group>
   )

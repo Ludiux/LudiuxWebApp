@@ -8,16 +8,16 @@ function Monitor({escapePressed, setActive, active, ...props}) {
     const [powerOn, setPower] = useState(false);
 
     let screenselect = <meshStandardMaterial color="#282828" metalness={0.96} roughness={0}/>;
-    let power = <meshStandardMaterial color="#FF0000" emissive="red" emissiveIntensity={0.6}/>;
+    let power = <meshStandardMaterial color="#FF0000" emissive="red" emissiveIntensity={2}/>;
 
     if(active) {
-        screenselect = shiny ? <meshStandardMaterial color="#282828" emissive="white" emissiveIntensity={0.6}/> :
+        screenselect = shiny ? <meshStandardMaterial color="#282828" emissive="white" emissiveIntensity={1.3}/> :
             <meshStandardMaterial color="#282828" metalness={0.96} roughness={0}/>
     }
 
     power = !powerOn ?
-        <meshStandardMaterial color="#FF0000" emissive="red" emissiveIntensity={3}/> :
-        <meshStandardMaterial color="#0000FF" emissive="#1F51FF" emissiveIntensity={4}/>
+        <meshStandardMaterial color="#FF0000" emissive="red" emissiveIntensity={7}/> :
+        <meshStandardMaterial color="#0000FF" emissive="#1F51FF" emissiveIntensity={10}/>
 
     const zIndex = active ? -100 : 0
 
@@ -52,11 +52,11 @@ function Monitor({escapePressed, setActive, active, ...props}) {
                 {screenselect} {/*Dynamic Material Variable*/}
                 <Html
                     zIndexRange={[zIndex, 0]}
-                    position={[0, -0, 0]}
+                    position={[0.001, -0, 0]}
                     transform={true}
                     rotation={[-1.57, -0, 0]}
-                    scale={[0.3, 0.6, 1]}
-                    distanceFactor={1.338}
+                    scale={[0.3015, 0.6, 1]}
+                    distanceFactor={1.33}
                 >
                     <iframe src="/embed" className={"w-480 h-245"} />
                 </Html>

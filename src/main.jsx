@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import {StrictMode} from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
@@ -7,7 +7,6 @@ import NotFound from "./sections/NotFound.jsx"
 import InfoPage from "./sections/InfoPage.jsx"
 import { KeyboardControls } from "@react-three/drei"
 import { Controls } from "./components/Controls.jsx"
-
 
 
 const map = [
