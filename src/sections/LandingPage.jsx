@@ -185,7 +185,7 @@ const LandingPage = () => {
                             luminanceSmoothing={0.3}/>
                 </EffectComposer>
                 <Perf position="top-left" />
-                <Environment files="../../../public/balcony_2k.exr" background={true} environmentIntensity={1} backgroundBlurriness={0.1} />
+                <Environment files="../../../balcony_2k.exr" background={true} environmentIntensity={1} backgroundBlurriness={0.1} />
 
                 <Scene onFocus={onFocus} />
                 <Dell scale={[0.5, 0.5, 0.5]} position={[2.8, -1.25, 1.73]} rotation={[0, 1.63, 0]} castShadow receiveShadow/>
