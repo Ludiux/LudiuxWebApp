@@ -1,4 +1,5 @@
-import {Canvas, useFrame} from "@react-three/fiber";
+import * as THREE from 'three'
+import {Canvas, useFrame, useLoader} from "@react-three/fiber";
 import {Environment, OrbitControls, useHelper} from "@react-three/drei";
 import Speaker from "../components/Models/HometheaterSubwooffer.jsx";
 import Room from "../components/Models/Room.jsx";
@@ -17,7 +18,10 @@ import WoodCube from "../components/Models/WoodCubes.jsx";
 import {Perf} from "r3f-perf";
 
 const MonitorScene = ({onFocus, setOnFocus, escapePressed, setActive, active}) => {
-    const texture = useLoader(THREE.TextureLoader, '/')
+    const open = useLoader(THREE.TextureLoader, '/public/assets/media/img/icons8-collapse-100.png')
+    const close = useLoader(THREE.TextureLoader, '/public/assets/media/img/icons8-expand-100.png')
+    const texture = onFocus ? open : close;
+
     useEffect(() => {
         if(onFocus) {console.log("Focusing!")}
         if(!onFocus){console.log("NonFocusing!")}
@@ -38,7 +42,10 @@ const MonitorScene = ({onFocus, setOnFocus, escapePressed, setActive, active}) =
                                     onClick={(e)=>setOnFocus(!onFocus)}
             >
                 <planeGeometry args={[0.1, 0.1]}/>
-                <meshStandardMaterial color="blue"/>
+                <meshStandardMaterial color="blue"
+                                      map={texture}
+                                      transparent={true}
+                />
             </mesh>}
 
         </>
