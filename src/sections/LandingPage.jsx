@@ -17,12 +17,11 @@ import WoodCube from "../components/Models/WoodCubes.jsx";
 import {Perf} from "r3f-perf";
 
 const MonitorScene = ({onFocus, setOnFocus, escapePressed, setActive, active}) => {
-
+    const texture = useLoader(THREE.TextureLoader, '/')
     useEffect(() => {
         if(onFocus) {console.log("Focusing!")}
         if(!onFocus){console.log("NonFocusing!")}
     },[onFocus])
-
 
     return (
         <>
@@ -33,10 +32,15 @@ const MonitorScene = ({onFocus, setOnFocus, escapePressed, setActive, active}) =
                  escapePressed={escapePressed}
                  setActive={setActive}
                  active={active}/>
-            <mesh position={[2.96, 0.91, 0.82]} rotation={[0, -1.57, 0]} onClick={(e)=>setOnFocus(!onFocus)}>
-                <planeGeometry args={[0.2, 0.1]}/>
+            {!active &&
+                <mesh position={[2.96, 0.91, 0.76]}
+                                    rotation={[0, -1.57, 0]}
+                                    onClick={(e)=>setOnFocus(!onFocus)}
+            >
+                <planeGeometry args={[0.1, 0.1]}/>
                 <meshStandardMaterial color="blue"/>
-            </mesh>
+            </mesh>}
+
         </>
     )
 };
