@@ -16,7 +16,7 @@ const map = [
 
 const router = createBrowserRouter([
     {
-        path: '/',
+        path: '/LudiuxWebApp',
         element: (
             <KeyboardControls map={map}>
                 <App />
