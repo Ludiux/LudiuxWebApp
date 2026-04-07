@@ -16,14 +16,14 @@ const map = [
 
 const router = createBrowserRouter([
     {
-        path: '/LudiuxWebApp',
+        path: '/',
         element: (
             <KeyboardControls map={map}>
                 <App />
             </KeyboardControls>
         )
     },
-    { path: '/LudiuxWebApp/embed', element:
+    { path: '/embed', element:
             <InfoPage /> },
     { path: "*", element: <NotFound /> },
 ])
