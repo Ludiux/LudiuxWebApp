@@ -4,7 +4,7 @@ const Header = () => {
 
     return (
         <>
-            <div className="fixed left-1.5 top-1.5 bg-[#FDC800] rounded-2xl">
+            <div className="fixed left-1.5 top-1.5 bg-[#FDC800] rounded-2xl invisible">
                 <a
                     href={"/embed"}
                     className="group relative inline-flex items-center justify-center overflow-hidden rounded-2xl border-7 w-48 h-20 border-[#221C40] p-4 px-5 py-2.5 font-medium text-[#C4DFE6] shadow-md transition duration-300 ease-out"
