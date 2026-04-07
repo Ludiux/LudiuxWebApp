@@ -3,7 +3,7 @@ import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
 function Room(props) {
-    const { nodes, materials } = useGLTF('/room.glb')
+    const { nodes, materials } = useGLTF('./room.glb')
     return (
         <group {...props} dispose={null}>
             <group
@@ -57,6 +57,6 @@ function Room(props) {
     )
 }
 
-useGLTF.preload('/room.glb')
+useGLTF.preload('./room.glb')
 
 export default Room

@@ -15,12 +15,11 @@ import { Controls } from "../components/Controls.jsx"
 import {PointLightHelper, Vector3} from "three";
 import {Alert, Snackbar} from "@mui/material";
 import WoodCube from "../components/Models/WoodCubes.jsx";
-// import {Perf} from "r3f-perf";
 import Keyboard from "../components/Models/Keyboard.jsx"
 
 const MonitorScene = ({onFocus, setOnFocus, escapePressed, setActive, active, lookingAt, setLookingAt}) => {
-    const open = useLoader(THREE.TextureLoader, '/public/assets/media/img/icons8-collapse-100.png')
-    const close = useLoader(THREE.TextureLoader, '/public/assets/media/img/icons8-expand-100.png')
+    const open = useLoader(THREE.TextureLoader, './public/assets/media/img/icons8-collapse-100.png')
+    const close = useLoader(THREE.TextureLoader, './public/assets/media/img/icons8-expand-100.png')
     const texture = onFocus ? open : close;
 
     useEffect(() => {
@@ -263,7 +262,7 @@ const LandingPage = () => {
                             luminanceSmoothing={0.3}/>
                 </EffectComposer>
                 {/*<Perf position="top-left" />*/}
-                <Environment files="../../../balcony_2k.exr" background={true} environmentIntensity={1} backgroundBlurriness={0.1} />
+                <Environment files="./balcony_2k.exr" background={true} environmentIntensity={1} backgroundBlurriness={0.1} />
                 <Scene onFocus={onFocus} lookingAt={lookingAt} setLookingAt={setLookingAt} />
                 {/*<LogCameraWithTarget controlsRef={controls}/>*/}
                 {/*<OrbitControls ref={controls} />*/}

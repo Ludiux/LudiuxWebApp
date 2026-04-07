@@ -2,7 +2,7 @@ import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
 function Speaker(props) {
-    const { nodes, materials } = useGLTF('/Speakers.glb')
+    const { nodes, materials } = useGLTF('./Speakers.glb')
     return (
         <group {...props} dispose={null}>
             <group rotation={[-Math.PI / 2, 0, 0]}>
@@ -20,6 +20,6 @@ function Speaker(props) {
     )
 }
 
-useGLTF.preload('/Speakers.glb')
+useGLTF.preload('./Speakers.glb')
 
 export default Speaker

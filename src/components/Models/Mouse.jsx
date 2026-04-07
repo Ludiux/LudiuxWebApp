@@ -7,7 +7,7 @@ import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
 function Mouse(props) {
-  const { nodes, materials } = useGLTF('/mouse.glb')
+  const { nodes, materials } = useGLTF('./mouse.glb')
   return (
     <group {...props} dispose={null}>
       <group position={[-0.002, 0, 0.004]}>
@@ -26,6 +26,6 @@ function Mouse(props) {
   )
 }
 
-useGLTF.preload('/mouse.glb')
+useGLTF.preload('./mouse.glb')
 
 export default Mouse

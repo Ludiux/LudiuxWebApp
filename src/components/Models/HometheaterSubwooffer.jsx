@@ -3,7 +3,7 @@ import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
 function Subwoofer(props) {
-    const { nodes, materials } = useGLTF('/HometheaterSubwooffer.glb')
+    const { nodes, materials } = useGLTF('./HometheaterSubwooffer.glb')
     return (
         <group {...props} dispose={null}>
             <group position={[1.922, 1.119, 0]} rotation={[0, 0, -Math.PI / 2]} scale={0.244}>
@@ -52,6 +52,6 @@ function Subwoofer(props) {
     )
 }
 
-useGLTF.preload('/HometheaterSubwooffer.glb')
+useGLTF.preload('./HometheaterSubwooffer.glb')
 
 export default Subwoofer

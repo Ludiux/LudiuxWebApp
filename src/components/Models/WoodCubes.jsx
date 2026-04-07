@@ -4,7 +4,7 @@ import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
 function WoodCube(props) {
-  const { nodes, materials } = useGLTF('/WoodCubes.glb')
+  const { nodes, materials } = useGLTF('./WoodCubes.glb')
   return (
     <group {...props} dispose={null}>
       <group position={[0, 1.139, 0]} scale={[0.513, 1.139, 1.139]}>
@@ -15,6 +15,6 @@ function WoodCube(props) {
   )
 }
 
-useGLTF.preload('/WoodCubes.glb')
+useGLTF.preload('./WoodCubes.glb')
 
 export default WoodCube

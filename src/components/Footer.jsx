@@ -4,7 +4,7 @@ const Footer = () => {
     const [active, setActive] = useState(false)
     const [onHover, setHovered] = useState(false)
     let color = !active ? "bg-[#333333]" : "bg-white";
-    let searchColor = !active ? "../../assets/media/img/searchGray.png" : "../../assets/media/img/search.png"
+    let searchColor = !active ? "./assets/media/img/searchGray.png" : "./assets/media/img/search.png"
     const textcolor = active
         ? "placeholder-black"
         : "placeholder-gray-300"

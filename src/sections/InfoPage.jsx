@@ -20,13 +20,13 @@ const InfoPage = () => {
     let Wallpaper = "";
     switch (getRandom()) {
         case 1:
-            Wallpaper = "/assets/media/img/Wallpaper.jpg"
+            Wallpaper = "./assets/media/img/Wallpaper.jpg"
             break;
         case 2:
-            Wallpaper = "/assets/media/img/Wallpaper2.png"
+            Wallpaper = "./assets/media/img/Wallpaper2.png"
             break;
         case 3:
-            Wallpaper = "/assets/media/img/Wallpaper3.jpg"
+            Wallpaper = "./assets/media/img/Wallpaper3.jpg"
             break;
     }
     return (

@@ -23,7 +23,7 @@ const router = createBrowserRouter([
             </KeyboardControls>
         )
     },
-    { path: '/embed', element:
+    { path: '/LudiuxWebApp/embed', element:
             <InfoPage /> },
     { path: "*", element: <NotFound /> },
 ])

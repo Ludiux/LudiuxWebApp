@@ -7,7 +7,7 @@ import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
 function Desk(props) {
-  const { nodes, materials } = useGLTF('/desk.glb')
+  const { nodes, materials } = useGLTF('./desk.glb')
   return (
     <group {...props} dispose={null}>
       <mesh geometry={nodes.Cube007.geometry} material={materials.Material} castShadow receiveShadow/>
@@ -15,6 +15,6 @@ function Desk(props) {
   )
 }
 
-useGLTF.preload('/desk.glb')
+useGLTF.preload('./desk.glb')
 
 export default Desk

@@ -2,7 +2,7 @@ import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
 function Keyboard(props) {
-  const { nodes, materials } = useGLTF('/Keyboard.glb')
+  const { nodes, materials } = useGLTF('./Keyboard.glb')
   return (
       <group {...props} dispose={null}>
         <group
@@ -49,6 +49,6 @@ function Keyboard(props) {
   )
 }
 
-useGLTF.preload('/Keyboard.glb')
+useGLTF.preload('./Keyboard.glb')
 
 export default Keyboard
