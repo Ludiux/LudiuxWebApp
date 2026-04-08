@@ -28,7 +28,7 @@ const Footer = () => {
                  onMouseEnter={() => setHovered(true)}
                  onMouseLeave={() => setHovered(false)}>
                 <button className={`${winButtonHover} fixed bottom-0 left-0 w-18 h-15`}></button>
-                <img src="/LudiuxWebApp/assets/media/img/WindowsLogo.png" alt="Windows Logo" className={`${winButtonHover2} w-27 h-22.5 fixed pointer-events-none`} />
+                <img src="/assets/media/img/WindowsLogo.png" alt="Windows Logo" className={`${winButtonHover2} w-27 h-22.5 fixed pointer-events-none`} />
             </div>
 
 

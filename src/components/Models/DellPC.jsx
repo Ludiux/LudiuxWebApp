@@ -7,7 +7,7 @@ import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
 function Dell(props) {
-  const { nodes, materials } = useGLTF('./dell_computer_scan_lowpoly.glb')
+  const { nodes, materials } = useGLTF('/dell_computer_scan_lowpoly.glb')
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
@@ -17,6 +17,6 @@ function Dell(props) {
   )
 }
 
-useGLTF.preload('./dell_computer_scan_lowpoly.glb')
+useGLTF.preload('/dell_computer_scan_lowpoly.glb')
 
 export default Dell

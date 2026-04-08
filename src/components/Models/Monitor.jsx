@@ -31,7 +31,7 @@ function Monitor({escapePressed, setActive, active, ...props}) {
         setPower(!active)
     }, [active])
 
-    const { nodes, materials } = useGLTF('./monitor.glb')
+    const { nodes, materials } = useGLTF('/monitor.glb')
 
 
     return (
@@ -58,7 +58,7 @@ function Monitor({escapePressed, setActive, active, ...props}) {
                     scale={[0.3015, 0.6, 1]}
                     distanceFactor={1.33}
                 >
-                    <iframe src="/LudiuxWebApp/embed" className={"w-480 h-245"} />
+                    <iframe src="/embed" className={"w-480 h-245"} />
                 </Html>
 
             </mesh>
@@ -92,6 +92,6 @@ function Monitor({escapePressed, setActive, active, ...props}) {
     )
 }
 
-useGLTF.preload('./monitor.glb')
+useGLTF.preload('/monitor.glb')
 
 export default Monitor

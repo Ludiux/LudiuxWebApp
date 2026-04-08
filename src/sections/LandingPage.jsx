@@ -18,8 +18,8 @@ import WoodCube from "../components/Models/WoodCubes.jsx";
 import Keyboard from "../components/Models/Keyboard.jsx"
 
 const MonitorScene = ({onFocus, setOnFocus, escapePressed, setActive, active, lookingAt, setLookingAt}) => {
-    const open = useLoader(THREE.TextureLoader, '/LudiuxWebApp/assets/media/img/icons8-collapse-100.png')
-    const close = useLoader(THREE.TextureLoader, '/LudiuxWebApp/assets/media/img/icons8-expand-100.png')
+    const open = useLoader(THREE.TextureLoader, '/assets/media/img/icons8-collapse-100.png')
+    const close = useLoader(THREE.TextureLoader, '/assets/media/img/icons8-expand-100.png')
     const texture = onFocus ? open : close;
 
     useEffect(() => {
