@@ -1,12 +1,13 @@
 import React from 'react'
+import {NavLink} from "react-router-dom";
 
 const Header = () => {
 
     return (
         <>
-            <div className="fixed left-1.5 top-1.5 bg-[#FDC800] rounded-2xl invisible">
-                <a
-                    href={"/embed"}
+            <div className="fixed left-1.5 top-1.5 bg-[#FDC800] rounded-2xl ">
+                <NavLink
+                    to={"/embed"}
                     className="group relative inline-flex items-center justify-center overflow-hidden rounded-2xl border-7 w-48 h-20 border-[#221C40] p-4 px-5 py-2.5 font-medium text-[#C4DFE6] shadow-md transition duration-300 ease-out"
                 >
             <span className="absolute inset-0 flex h-full w-full -translate-y-full items-center justify-center bg-[#221C40] text-white duration-300 group-hover:translate-y-0">
@@ -21,7 +22,7 @@ const Header = () => {
               Exit
             </span>
                     <span className="invisible relative">Button</span>
-                </a>
+                </NavLink>
             </div>
         </>
     )

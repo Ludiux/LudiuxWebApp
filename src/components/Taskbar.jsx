@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-const Footer = () => {
+const Taskbar = () => {
     const [active, setActive] = useState(false)
     const [onHover, setHovered] = useState(false)
     let color = !active ? "bg-[#333333]" : "bg-white";
@@ -49,4 +49,4 @@ const Footer = () => {
 
     )
 }
-export default Footer
+export default Taskbar

@@ -1,7 +1,6 @@
 import React from 'react'
-import Header from "../components/Header.jsx";
-import Body from "../components/Body.jsx";
-import Footer from "../components/Footer.jsx";
+import Body from "../../components/Body.jsx";
+import Taskbar from "../../components/Taskbar.jsx";
 
 let last = null
 
@@ -16,7 +15,7 @@ function getRandom() {
     return num
 }
 
-const InfoPage = () => {
+const Desktop = () => {
     let Wallpaper = "";
     switch (getRandom()) {
         case 1:
@@ -31,10 +30,10 @@ const InfoPage = () => {
     }
     return (
         <div className="min-h-screen bg-no-repeat bg-cover" style={{ backgroundImage: `url(${Wallpaper})` }}>
-            <Header />
             <Body />
-            <Footer/>
+            <Taskbar/>
         </div>
     )
 }
-export default InfoPage
+
+export default Desktop
