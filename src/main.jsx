@@ -1,22 +1,26 @@
-import { StrictMode } from 'react'
+import {StrictMode} from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import NotFound from "./sections/NotFound.jsx"
-import EmbedWebsite from "./sections/EmbedWebsite.jsx"
 import { KeyboardControls } from "@react-three/drei"
 import { Controls } from "./components/Controls.jsx"
 import Browser from "./sections/SubSections/Browser.jsx";
+import Desktop from "./sections/SubSections/Desktop.jsx";
+import TabGithub from "./sections/SubSections/TabGithub.jsx";
+
 
 const map = [
     { name: Controls.escape, keys: ["Escape"] },
 ]
 
+
 createRoot(document.getElementById('root')).render(
     <StrictMode>
         <BrowserRouter>
-            <Routes>
+            <Routes location={location} key={location.pathname}>
+
                 <Route
                     path="/"
                     element={
@@ -25,9 +29,12 @@ createRoot(document.getElementById('root')).render(
                         </KeyboardControls>
                     }
                 />
-                <Route path="/embed" element={<EmbedWebsite />} />
+
+                <Route path="/Desktop" element={<Desktop />} />
+                <Route path="/Browser" element={<Browser />} />
+                <Route path="/TabGithub" element={<TabGithub />} />
                 <Route path="*" element={<NotFound />} />
-                <Route path="/Browser/*" element={<Browser />} />
+
             </Routes>
         </BrowserRouter>
     </StrictMode>

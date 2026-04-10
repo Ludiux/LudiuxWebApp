@@ -56,11 +56,10 @@ function Monitor({escapePressed, setActive, active, ...props}) {
                     transform={true}
                     rotation={[-1.57, -0, 0]}
                     scale={[0.3015, 0.6, 1]}
-                    distanceFactor={1.33}
+                    distanceFactor={1.336}
                 >
-                    <iframe src="/embed" className={"w-480 h-245"} />
+                    <iframe src="/Desktop" className={"w-480 h-245"} />
                 </Html>
-
             </mesh>
             <mesh
                 name="Твердое_тело1001"

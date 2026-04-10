@@ -1,11 +1,13 @@
 import React from 'react'
 import Taskbar from "../../components/Taskbar.jsx";
 import Header from "../../components/Header.jsx";
+import LinkedinPage from "../../components/LinkedinPage.jsx";
 
-const Browser = () => {
+const Browser = (pageLocation) => {
     return (
-        <div className="min-h-screen bg-no-repeat bg-cover bg-white ">
-            <Header />
+        <div className="absolute top-0 left-0 w-full h-full bg-[#F4F2EE] z-10 ">
+            <Header/>
+            <LinkedinPage/>
             <Taskbar/>
         </div>
     )
