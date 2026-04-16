@@ -9,6 +9,7 @@ import { Controls } from "./components/Controls.jsx"
 import Browser from "./sections/SubSections/Browser.jsx";
 import Desktop from "./sections/SubSections/Desktop.jsx";
 import TabGithub from "./sections/SubSections/TabGithub.jsx";
+import Contact from "./sections/SubSections/Contact.jsx";
 
 
 const map = [
@@ -33,6 +34,7 @@ createRoot(document.getElementById('root')).render(
                 <Route path="/Desktop" element={<Desktop />} />
                 <Route path="/Browser" element={<Browser />} />
                 <Route path="/TabGithub" element={<TabGithub />} />
+                <Route path="/Contact" element={<Contact />} />
                 <Route path="*" element={<NotFound />} />
 
             </Routes>

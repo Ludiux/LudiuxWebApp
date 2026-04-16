@@ -16,18 +16,24 @@ const Header = () => {
     }, [location]);
     switch(pageLocation) {
         case "/Browser":
-            tab2 = "bg-gray-500"
             tab = "bg-gray-700"
+            tab2 = "bg-gray-500"
+            tab3 = "bg-gray-700"
             break;
         case "/TabGithub":
             tab = "bg-gray-500"
             tab2 = "bg-gray-700"
+            tab3 = "bg-gray-700"
             break;
+        case "/Contact":
+            tab = "bg-gray-700"
+            tab2 = "bg-gray-700"
+            tab3 = "bg-gray-500"
     }
 
     return (
         <>
-            <div className={`w-full h-11.5 bg-gray-700 p-0 m-0`}>
+            <div className={`fixed top-0 right-0 w-full h-11.5 bg-gray-700 p-0 m-0`}>
                 <NavLink to="/Browser" className={`fixed top-0 left-0 p-0 m-0 w-45 h-11.5 flex items-center justify-center rounded-xl hover:bg-gray-600 font-light  ${tab2} text-3xl leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none active:shadow-lg`}>
                     <img src="/assets/media/img/linkedin_logo.png" alt="LinkedIn" className="p-0 w-9 h-9 mx-1 "/>
                     <h1 className="m-1">Linkedin</h1>
@@ -35,6 +41,10 @@ const Header = () => {
                 <NavLink to="/TabGithub" className={`fixed top-0 left-45 py-1 px-7 hover:bg-gray-600 font-light rounded-xl flex justify-baseline items-center ${tab} text-3xl leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none active:shadow-lg`}>
                     <img src="/assets/media/img/github_logo.png" alt="LinkedIn" className="p-0 w-9 h-9 mx-1 ml-0 "/>
                     <h1 className="m-0">GitHub</h1>
+                </NavLink>
+                <NavLink to="/Contact" className={`fixed top-0 left-93 py-1 px-7 hover:bg-gray-600 font-light rounded-xl flex justify-baseline items-center ${tab3} text-3xl leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none active:shadow-lg`}>
+                    <img src="/assets/media/img/gmail.png" alt="LinkedIn" className="p-0 w-9 h-9 mx-1 ml-0 "/>
+                    <h1 className="m-0">Gmail</h1>
                 </NavLink>
                 <NavLink to="/Desktop" className="fixed top-0 right-0 py-1 px-7 hover:bg-red-400 font-light bg-gray-600 text-3xl uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none active:shadow-lg">
                     x

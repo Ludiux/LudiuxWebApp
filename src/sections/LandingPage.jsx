@@ -241,7 +241,7 @@ const LandingPage = () => {
         <div className="w-full h-full absolute inset-0">
             <Snackbar
                 open={open}
-                autoHideDuration={4000}
+                autoHideDuration={2000}
                 onClose={() => setOpen(false)}
                 anchorOrigin={{ vertical: "top", horizontal: "center" }}
             >
