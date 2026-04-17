@@ -58,7 +58,10 @@ function Monitor({escapePressed, setActive, active, ...props}) {
                     scale={[0.3015, 0.6, 1]}
                     distanceFactor={1.336}
                 >
-                    <iframe src="/Desktop" className={"w-480 h-245"} />
+                    <iframe src="/Desktop" className={"w-480 h-245"} style={{
+                        border: "none",
+                        imageRendering: "auto"
+                    }} />
                 </Html>
             </mesh>
             <mesh
