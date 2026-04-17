@@ -5,7 +5,7 @@ import ContactPage from "../../components/ContactPage.jsx";
 
 const Contact = () => {
     return (
-        <div className="bg-[#F8FAFD]">
+        <div className="absolute top-0 left-0 w-full h-full bg-[#F8FAFD]">
             <Header/>
             <ContactPage/>
             <Taskbar/>
