@@ -68,8 +68,10 @@ const LinkedinPage = () => {
                                  alt="Profile Picture"
                                  className="rounded-[50%] p-1 "/>
                             <h1 className="font-semibold text-xl w-100">👤Santiago Ferreyra</h1>
-                            <h2 className="w-90 text-lg">WebDev reaching for new horizons and learnig as much as i can!</h2>
+                            <h2 className="w-130 text-lg">WebDev reaching for new horizons and learnig as much as i can!</h2>
                             <h3 className="w-100 text-sm text-gray-500">Cordoba, Cordoba, Argentina</h3>
+                            <img src='/assets/media/img/UTN.jpg' alt="UTN" className="w-13 h-10 fixed top-108 right-237 z-100"/>
+                            <h2 className="fixed top-107 right-187 font-semibold w-50">Universidad Tecnológica Nacional (UTN)</h2>
                         </div>
 
                         {/*Contact Button*/}
