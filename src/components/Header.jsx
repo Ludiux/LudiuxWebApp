@@ -33,7 +33,7 @@ const Header = () => {
 
     return (
         <>
-            <div className={`fixed top-0 right-0 w-full h-11.5 bg-gray-700 p-0 m-0`}>
+            <div className={`relative top-0 right-0 w-full h-11.5 bg-gray-700 p-0 m-0`}>
                 <NavLink to="/Browser" className={`fixed top-0 left-0 p-0 m-0 w-45 h-11.5 flex items-center justify-center rounded-xl hover:bg-gray-600 font-light  ${tab2} text-3xl leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none active:shadow-lg`}>
                     <img src="/assets/media/img/linkedin_logo.png" alt="LinkedIn" className="p-0 w-9 h-9 mx-1 "/>
                     <h1 className="m-1">Linkedin</h1>
