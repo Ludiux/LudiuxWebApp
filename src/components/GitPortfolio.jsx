@@ -92,7 +92,7 @@ const GitPortfolio = () => {
 
                 {/* Left side*/}
                 <div className="w-80 h-150 mx-6 flex flex-col justify-start items-start">
-                    <img src="/assets/media/img/LudiuxLogoRemaster.png" alt="Profile pic" className="w-70 mt-10 mb-3 border-2 border-[#3D444D] rounded-full" />
+                    <img src="/assets/media/img/LudiuxLogoRemaster.png" alt="Profile pic" className="w-70 mt-10 mb-3 border-2 border-[#3D444D] transform-gpu backface-hidden rounded-full" />
                     <h1 className="text-2xl font-bold py-0 my-0 h-fit text-white">Ludiux</h1>
                     <h2 className="text-xl font-light py-0 my-0 h-fit text-gray-400">Ludiux · he/him</h2>
                     <h2 className="text-base font-normal mt-3.5 text-white font-sans">Just trying to do better</h2>

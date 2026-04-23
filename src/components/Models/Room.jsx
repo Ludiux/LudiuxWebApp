@@ -8,7 +8,7 @@ function Room(props) {
         <group {...props} dispose={null}>
             <group
                 name="Sketchfab_model"
-                position={[2.6073, 2.05, -0.2]}
+                position={[2.785, 2.05, -0.2]}
                 rotation={[-Math.PI / 2, 0, -1.5688]}
                 scale={0.166}>
                 <group name="GLTF_SceneRootNode" rotation={[Math.PI / 2, 0, 0]}>

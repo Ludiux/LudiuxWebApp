@@ -16,6 +16,11 @@ import {PointLightHelper, Vector3} from "three";
 import {Alert, Snackbar} from "@mui/material";
 import WoodCube from "../components/Models/WoodCubes.jsx";
 import Keyboard from "../components/Models/Keyboard.jsx"
+import D20 from "../components/Models/D20.jsx";
+import Bag from "../components/Models/Bag.jsx";
+import Candles from "../components/Models/CandlesSet.jsx";
+import Candle1 from "../components/Models/Candle1.jsx";
+import Candle2 from "../components/Models/Candle2.jsx";
 
 const MonitorScene = ({onFocus, setOnFocus, escapePressed, setActive, active, lookingAt, setLookingAt}) => {
     const open = useLoader(THREE.TextureLoader, '/assets/media/img/icons8-collapse-100.png')
@@ -203,6 +208,7 @@ const LandingPage = () => {
     const [active, setActive] = useState(true)
     const [lookingAt, setLookingAt] = useState(0);
     const controls = useRef()
+    const [MedievalMode, setMedievalMode] = useState(false)
 
     const escapePressed = useKeyboardControls(
         (state) => state[Controls.escape]
@@ -273,6 +279,17 @@ const LandingPage = () => {
                 <WoodCube scale={[0.5, 0.5, 0.5]} position={[2.72, -0.08, 1.74]} rotation={[0, 1.6, 0]} onClick={cubeClick} castShadow receiveShadow/>
                 <WoodCube scale={[0.5, 0.5, 0.5]} position={[2.72, 1.055, 1.74]} rotation={[0, 1.6, 0]} onClick={cubeClick2} castShadow receiveShadow/>
                 <Desk scale={[1.37, 1.2, 1.37]} position={[2.75, -0.7, -0.15]} rotation={[0, -1.57, 0]} castShadow receiveShadow/>
+                <Bag scale={[0.22, 0.22, 0.22]} position={[3, -0.6, -0.1]} rotation={[-1.6, 0, 1]}/>
+                <D20 scale={[0.05, 0.05, 0.05]} position={[2.8, -0.62, -0.22]}/>
+                {MedievalMode &&
+                    <>
+                        <Candles scale={[1.5, 1.8, 1.5]} position={[2.8, 0.46, -1.5]}/>
+                        <Candles scale={[1.5, 1.8, 1.5]} position={[2.8, -0.055, 1.7]}/>
+                        <Candle1 scale={[1.5, 1.8, 1.5]} position={[2.6, 1, 0.85]}/>
+                        <Candle2 scale={[1.5, 1.8, 1.5]} position={[2.8, 1.26, -1.2]}/>
+                    </>
+
+                }
                 <Subwoofer scale={[0.18, 0.18, 0.18]} position={[2.87, 0.12, -1.48]} rotation={[0, -3.1, 0]} castShadow receiveShadow />
                 <Speaker scale={[1.5, 1.5, 1.5]} position={[3.15, -0.2, -1.05]} rotation={[0, -1.3, 0]}/>
                 <Speaker scale={[1.5, 1.5, 1.5]} position={[3.1, -0.2, 1.17]} rotation={[0, -2, 0]}/>
