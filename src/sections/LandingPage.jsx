@@ -21,6 +21,9 @@ import Bag from "../components/Models/Bag.jsx";
 import Candles from "../components/Models/CandlesSet.jsx";
 import Candle1 from "../components/Models/Candle1.jsx";
 import Candle2 from "../components/Models/Candle2.jsx";
+import HammerModel from "../components/Models/Hammer.jsx";
+import useHammerStore from '../services/store.js'
+
 
 const MonitorScene = ({onFocus, setOnFocus, escapePressed, setActive, active, lookingAt, setLookingAt}) => {
     const open = useLoader(THREE.TextureLoader, '/assets/media/img/icons8-collapse-100.png')
@@ -209,6 +212,8 @@ const LandingPage = () => {
     const [lookingAt, setLookingAt] = useState(0);
     const controls = useRef()
     const [MedievalMode, setMedievalMode] = useState(false)
+    const { hammer, setHammer } = useHammerStore();
+
 
     const escapePressed = useKeyboardControls(
         (state) => state[Controls.escape]
@@ -225,6 +230,9 @@ const LandingPage = () => {
    }
 
     useEffect(() => {
+        console.log(hammer)
+    }, [hammer]);
+    useEffect(() => {
         if (!escapePressed) {
             setOnFocus(false)
         }
@@ -233,7 +241,6 @@ const LandingPage = () => {
     useEffect(() => {
         setOnFocus(!active)
     }, [active])
-
 
     const [open, setOpen] = useState(false);
 
@@ -281,6 +288,12 @@ const LandingPage = () => {
                 <Desk scale={[1.37, 1.2, 1.37]} position={[2.75, -0.7, -0.15]} rotation={[0, -1.57, 0]} castShadow receiveShadow/>
                 <Bag scale={[0.22, 0.22, 0.22]} position={[3, -0.6, -0.1]} rotation={[-1.6, 0, 1]}/>
                 <D20 scale={[0.05, 0.05, 0.05]} position={[2.8, -0.62, -0.22]}/>
+                <Subwoofer scale={[0.18, 0.18, 0.18]} position={[2.87, 0.12, -1.48]} rotation={[0, -3.1, 0]} castShadow receiveShadow />
+                <Speaker scale={[1.5, 1.5, 1.5]} position={[3.15, -0.2, -1.05]} rotation={[0, -1.3, 0]}/>
+                <Speaker scale={[1.5, 1.5, 1.5]} position={[3.1, -0.2, 1.17]} rotation={[0, -2, 0]}/>
+                <Speaker scale={[1.5, 1.5, 1.5]} position={[3.106, 0.13, 1.176]} rotation={[0, -2, 0]}/>
+                <Room position={[0, -2, 0.2]} receiveShadow/>
+
                 {MedievalMode &&
                     <>
                         <Candles scale={[1.5, 1.8, 1.5]} position={[2.8, 0.46, -1.5]}/>
@@ -290,11 +303,9 @@ const LandingPage = () => {
                     </>
 
                 }
-                <Subwoofer scale={[0.18, 0.18, 0.18]} position={[2.87, 0.12, -1.48]} rotation={[0, -3.1, 0]} castShadow receiveShadow />
-                <Speaker scale={[1.5, 1.5, 1.5]} position={[3.15, -0.2, -1.05]} rotation={[0, -1.3, 0]}/>
-                <Speaker scale={[1.5, 1.5, 1.5]} position={[3.1, -0.2, 1.17]} rotation={[0, -2, 0]}/>
-                <Speaker scale={[1.5, 1.5, 1.5]} position={[3.106, 0.13, 1.176]} rotation={[0, -2, 0]}/>
-                <Room position={[0, -2, 0.2]} receiveShadow/>
+                {hammer && (
+                    <HammerModel scale={[2, 2, 2]} position={[2, 0, 0]}/>
+                )}
             </Canvas>
         </div>
     );

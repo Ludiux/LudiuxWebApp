@@ -16,8 +16,8 @@ const map = [
     { name: Controls.escape, keys: ["Escape"] },
 ]
 
-
 createRoot(document.getElementById('root')).render(
+
     <StrictMode>
         <BrowserRouter>
             <Routes location={location} key={location.pathname}>
