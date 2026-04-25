@@ -1,18 +1,30 @@
 import React, {useState, useEffect} from 'react'
-import { Html, useGLTF } from '@react-three/drei'
+import {Html, useGLTF, useTexture} from '@react-three/drei'
+import hammerStore from "../../services/store.js";
 
 
 function Monitor({escapePressed, setActive, active, ...props}) {
-
+    const hammerVisible = hammerStore((state) => state.hammerVisible);
+    const setHammerVisibility = hammerStore((state) => state.setHammerVisibility);
     const [shiny, setShiny] = useState(false);
     const [powerOn, setPower] = useState(false);
 
     let screenselect = <meshStandardMaterial color="#282828" metalness={0.96} roughness={0}/>;
     let power = <meshStandardMaterial color="#FF0000" emissive="red" emissiveIntensity={2}/>;
+    const brokenTexture = useTexture("public/assets/media/img/BreakIt.png")
+
+    useEffect(() => {
+        brokenTexture.repeat.y = -1
+        brokenTexture.offset.y = 1
+    }, [brokenTexture])
 
     if(active) {
         screenselect = shiny ? <meshStandardMaterial color="#282828" emissive="white" emissiveIntensity={1.3}/> :
             <meshStandardMaterial color="#282828" metalness={0.96} roughness={0}/>
+    }
+
+    if(!active) {
+        screenselect = <meshBasicMaterial map={brokenTexture}/>
     }
 
     power = !powerOn ?
@@ -50,20 +62,28 @@ function Monitor({escapePressed, setActive, active, ...props}) {
                 scale={[0.267375, 0.15038, 0.15038]}>
 
                 {screenselect} {/*Dynamic Material Variable*/}
-                <Html
-                    zIndexRange={[zIndex, 0]}
-                    position={[0.001, -0, 0]}
-                    transform={true}
-                    rotation={[-1.57, -0, 0]}
-                    scale={[0.3015, 0.6, 1]}
-                    distanceFactor={1.336}
-                >
-                    <iframe src="/Desktop" className={"w-480 h-245"} style={{
-                        border: "none",
-                        imageRendering: "auto"
-                    }} />
-                </Html>
+
+                {!hammerVisible && (
+                    <Html
+                        zIndexRange={[zIndex, 0]}
+                        position={[0.001, -0, 0]}
+                        transform={true}
+                        rotation={[-1.57, -0, 0]}
+                        scale={[0.3015, 0.6, 1]}
+                        distanceFactor={1.336}
+                    >
+                        <iframe src="/Desktop" className={"w-480 h-245"} style={{
+                            border: "none",
+                            imageRendering: "auto"
+                        }} />
+                    </Html>
+                )
+                }
+
+
+
             </mesh>
+
             <mesh
                 name="Твердое_тело1001"
                 onPointerEnter={() => setShiny(true)}

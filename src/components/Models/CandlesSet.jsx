@@ -1,28 +1,10 @@
 import React, { useRef } from 'react'
-import {useGLTF, useAnimations, useHelper} from '@react-three/drei'
-import {PointLightHelper} from "three";
+import {useGLTF, useAnimations} from '@react-three/drei'
 
 export function Candles(props) {
     const group = useRef()
     const { nodes, materials, animations } = useGLTF('/candles_set.glb')
     const { actions } = useAnimations(animations, group)
-
-    function LightHelper(){
-        const lightRef = useRef(null);
-        useHelper(lightRef, PointLightHelper, 1, "yellow");
-
-        return <pointLight ref={lightRef}
-                           scale={[0.02, 0.02, 0.02]}
-                           position={[-0.18, -0.1, -0.08]}
-                           color={"#FF954F"}
-                           intensity={3.5} decay={1}
-                           shadow-mapSize-width={2048}
-                           shadow-mapSize-height={2048}
-                           shadow-bias={-0.0005}
-                           shadow-normalBias={0.02}
-                           distance={5}
-                           castShadow/>;
-    }
 
     return (
         <group ref={group} {...props} dispose={null}>
@@ -144,30 +126,30 @@ export function Candles(props) {
                                     morphTargetDictionary={nodes.mesh_8.morphTargetDictionary}
                                     morphTargetInfluences={nodes.mesh_8.morphTargetInfluences}
                                 />
-                                <LightHelper/>
-                                {/*<pointLight*/}
-                                {/*            scale={[0.02, 0.02, 0.02]}*/}
-                                {/*            position={[-0.0, -0.05, -0.085]}*/}
-                                {/*            color={"#FF954F"}*/}
-                                {/*            intensity={3.5} decay={1}*/}
-                                {/*            shadow-mapSize-width={2048}*/}
-                                {/*            shadow-mapSize-height={2048}*/}
-                                {/*            shadow-bias={-0.0005}*/}
-                                {/*            shadow-normalBias={0.02}*/}
-                                {/*            distance={5}*/}
-                                {/*            castShadow/>*/}
-                                {/*<pointLight*/}
-                                {/*    scale={[0.02, 0.02, 0.02]}*/}
-                                {/*    position={[0, 0.015, 0.01]}*/}
-                                {/*    color={"#FF954F"}*/}
-                                {/*    intensity={3.5} decay={1}*/}
-                                {/*    shadow-mapSize-width={2048}*/}
-                                {/*    shadow-mapSize-height={2048}*/}
-                                {/*    shadow-bias={-0.0005}*/}
-                                {/*    shadow-normalBias={0.02}*/}
-                                {/*    distance={5}*/}
-                                {/*    castShadow*/}
-                                {/*/>*/}
+
+                                <pointLight
+                                    scale={[0.02, 0.02, 0.02]}
+                                    position={[-0.0, -0.05, -0.085]}
+                                    color={"#fae446"}
+                                    intensity={1} decay={1}
+                                    shadow-mapSize-width={2048}
+                                    shadow-mapSize-height={2048}
+                                    shadow-bias={-0.0005}
+                                    shadow-normalBias={0.02}
+                                    distance={1}
+                                    castShadow/>
+                                <pointLight
+                                    scale={[0.02, 0.02, 0.02]}
+                                    position={[0, 0.015, 0.01]}
+                                    color={"#fae446"}
+                                    intensity={1} decay={1}
+                                    shadow-mapSize-width={2048}
+                                    shadow-mapSize-height={2048}
+                                    shadow-bias={-0.0005}
+                                    shadow-normalBias={0.02}
+                                    distance={1}
+                                    castShadow
+                                />
                             </group>
                         </group>
                     </group>

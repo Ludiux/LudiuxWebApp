@@ -16,8 +16,18 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: console;
+    src: url(../public/assets/fonts/RetraConsole.woff2) format(woff2),
+    url(../public/assets/fonts/RetraConsole.woff) format(woff);
+    font-weight: normal;
+    font-display: swap;
+}
+
+
 @theme{
     --font-pixels: pixels, "sans-serif";
     --font-gameboy: "gameboy", "sans-serif";
+    --font-console: "console", "sans-serif";
 }
 

@@ -33,8 +33,8 @@ export function Candle1(props) {
                     <pointLight
                         scale={[0.2, 0.2, 0.2]}
                         position={[0, -0, -1]}
-                        color={"#F0B904"}
-                        intensity={4} decay={2}
+                        color={"#fae446"}
+                        intensity={2} decay={2}
                         shadow-mapSize-width={2048}
                         shadow-mapSize-height={2048}
                         shadow-bias={-0.0005}

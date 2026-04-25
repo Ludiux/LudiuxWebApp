@@ -22,8 +22,7 @@ import Candles from "../components/Models/CandlesSet.jsx";
 import Candle1 from "../components/Models/Candle1.jsx";
 import Candle2 from "../components/Models/Candle2.jsx";
 import HammerModel from "../components/Models/Hammer.jsx";
-import useHammerStore from '../services/store.js'
-
+import hammerStore from '../services/store.js'
 
 const MonitorScene = ({onFocus, setOnFocus, escapePressed, setActive, active, lookingAt, setLookingAt}) => {
     const open = useLoader(THREE.TextureLoader, '/assets/media/img/icons8-collapse-100.png')
@@ -192,6 +191,85 @@ function LightHelper(){
                        distance={10}
                        castShadow/>;
 }
+
+const HammerAnimated = ({ setOnFocus }) => {
+    const hammerVisible = hammerStore((state) => state.hammerVisible)
+    const setHammerVisibility = hammerStore((state) => state.setHammerVisibility)
+    const [animation, setAnimation] = useState(false)
+
+    const hammerRef = useRef()
+    const start = new Vector3(1.4, 2, 0.5)
+    const end = new Vector3(1.4, 0.3, 0.5)
+    const startTime = useRef(null)
+    const startAnimationTime = useRef(null)
+
+
+    useEffect( () => {
+        if (hammerVisible && hammerRef.current) {
+            hammerRef.current.position.copy(start)
+            startTime.current = null
+            startAnimationTime.current = null
+        }
+
+        const timer = setTimeout(() => {
+            setOnFocus(false)
+        }, 1200)
+
+        return () => clearTimeout(timer)
+
+    }, [hammerVisible])
+
+    useEffect(() => {
+        const handler = (event) => {
+            if (event.origin !== window.location.origin) return
+
+            if (event.data.type === "SET_HAMMER") {
+                setHammerVisibility(event.data.value)
+            }
+        }
+
+        window.addEventListener("message", handler)
+        return () => window.removeEventListener("message", handler)
+    }, [])
+
+    useFrame((state) => {
+        if (!hammerVisible || !hammerRef.current) return
+
+        if (startTime.current === null) {
+            startTime.current = state.clock.elapsedTime
+        }
+
+        const elapsed = state.clock.elapsedTime - startTime.current
+
+
+        if(!animation){
+            if (elapsed > 1.5) {
+                hammerRef.current.position.lerp(end, 0.03)
+            }
+        }else{
+            if (startTime.current === null) {
+                startAnimationTime.current = state.clock.elapsedTime
+            }
+            const animationTime = state.clock.elapsedTime - startTime.current
+
+            if(animationTime < 0.6){
+
+            }
+        }
+    })
+
+    if (!hammerVisible) return null
+
+    return (
+        <HammerModel
+            ref={hammerRef}
+            scale={[0.6, 0.6, 0.6]}
+            position={[1.4, 2, 0.5]}
+            rotation={[0, -3, 0]}
+        />
+    )
+}
+
 // Log camera with target function
 
 // function LogCameraWithTarget({ controlsRef }) {
@@ -210,15 +288,14 @@ function LightHelper(){
 const LandingPage = () => {
     const [active, setActive] = useState(true)
     const [lookingAt, setLookingAt] = useState(0);
+    const [medievalMode, setMedievalMode] = useState(false)
+    const [onFocus, setOnFocus] = useState(false);
     const controls = useRef()
-    const [MedievalMode, setMedievalMode] = useState(false)
-    const { hammer, setHammer } = useHammerStore();
 
 
     const escapePressed = useKeyboardControls(
         (state) => state[Controls.escape]
     )
-    const [onFocus, setOnFocus] = useState(false);
 
    function cubeClick(){
        setLookingAt(2)
@@ -229,9 +306,6 @@ const LandingPage = () => {
        setOnFocus(!onFocus);
    }
 
-    useEffect(() => {
-        console.log(hammer)
-    }, [hammer]);
     useEffect(() => {
         if (!escapePressed) {
             setOnFocus(false)
@@ -267,16 +341,22 @@ const LandingPage = () => {
                 camera={{ position: [-0.37, 1, -0.1], fov: 40 }}
                 shadows={true}
             >
-                <ambientLight intensity={0.15} color={"#FF954F"}/>
-                <LightHelper />
+                {!medievalMode && (
+                    <>
+                        <LightHelper />
+                        <Environment files="./balcony_2k.exr" background={true} environmentIntensity={1} backgroundBlurriness={0.1} />
+                    </>
+                )
+                }
+                <ambientLight intensity={0.20} color={"#FF954F"}/>
                 <EffectComposer>
                     <Bloom  intensity={0.5}      // strength of glow
                             luminanceThreshold={0.8} // what glows
                             luminanceSmoothing={0.3}/>
                 </EffectComposer>
                 {/*<Perf position="top-left" />*/}
-                <Environment files="./balcony_2k.exr" background={true} environmentIntensity={1} backgroundBlurriness={0.1} />
                 <Scene onFocus={onFocus} lookingAt={lookingAt} setLookingAt={setLookingAt} />
+                <HammerAnimated setOnFocus={setOnFocus}/>
                 {/*<LogCameraWithTarget controlsRef={controls}/>*/}
                 {/*<OrbitControls ref={controls} />*/}
                 <Dell scale={[0.5, 0.5, 0.5]} position={[2.8, -1.25, 1.73]} rotation={[0, 1.63, 0]} castShadow receiveShadow/>
@@ -287,14 +367,14 @@ const LandingPage = () => {
                 <WoodCube scale={[0.5, 0.5, 0.5]} position={[2.72, 1.055, 1.74]} rotation={[0, 1.6, 0]} onClick={cubeClick2} castShadow receiveShadow/>
                 <Desk scale={[1.37, 1.2, 1.37]} position={[2.75, -0.7, -0.15]} rotation={[0, -1.57, 0]} castShadow receiveShadow/>
                 <Bag scale={[0.22, 0.22, 0.22]} position={[3, -0.6, -0.1]} rotation={[-1.6, 0, 1]}/>
-                <D20 scale={[0.05, 0.05, 0.05]} position={[2.8, -0.62, -0.22]}/>
+                <D20 scale={[0.05, 0.05, 0.05]} position={[2.8, -0.62, -0.22]} setMedievalMode={setMedievalMode} medievalMode={medievalMode} />
                 <Subwoofer scale={[0.18, 0.18, 0.18]} position={[2.87, 0.12, -1.48]} rotation={[0, -3.1, 0]} castShadow receiveShadow />
                 <Speaker scale={[1.5, 1.5, 1.5]} position={[3.15, -0.2, -1.05]} rotation={[0, -1.3, 0]}/>
                 <Speaker scale={[1.5, 1.5, 1.5]} position={[3.1, -0.2, 1.17]} rotation={[0, -2, 0]}/>
                 <Speaker scale={[1.5, 1.5, 1.5]} position={[3.106, 0.13, 1.176]} rotation={[0, -2, 0]}/>
                 <Room position={[0, -2, 0.2]} receiveShadow/>
 
-                {MedievalMode &&
+                {medievalMode &&
                     <>
                         <Candles scale={[1.5, 1.8, 1.5]} position={[2.8, 0.46, -1.5]}/>
                         <Candles scale={[1.5, 1.8, 1.5]} position={[2.8, -0.055, 1.7]}/>
@@ -303,9 +383,7 @@ const LandingPage = () => {
                     </>
 
                 }
-                {hammer && (
-                    <HammerModel scale={[2, 2, 2]} position={[2, 0, 0]}/>
-                )}
+
             </Canvas>
         </div>
     );

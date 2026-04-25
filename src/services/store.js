@@ -1,8 +1,10 @@
-import { create } from 'zustand';
+import {create} from 'zustand'
 
-const useHammerStore = create((set) => ({
-    hammer: false,
-    setHammer: (value) => set({ hammer: value }),
+const hammerStore = create((set) => ({
+    hammerVisible: false,
+    setHammerVisibility: (visibility) => set((state) => ({
+        hammerVisible: visibility,
+    }))
 }));
 
-export default useHammerStore;
+export default hammerStore;
