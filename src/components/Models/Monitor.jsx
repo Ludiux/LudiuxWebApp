@@ -11,7 +11,7 @@ function Monitor({escapePressed, setActive, active, ...props}) {
 
     let screenselect = <meshStandardMaterial color="#282828" metalness={0.96} roughness={0}/>;
     let power = <meshStandardMaterial color="#FF0000" emissive="red" emissiveIntensity={2}/>;
-    const brokenTexture = useTexture("public/assets/media/img/BreakIt.png")
+    const brokenTexture = useTexture("/assets/media/img/BreakIt.png")
 
     useEffect(() => {
         brokenTexture.repeat.y = -1
