@@ -8,6 +8,7 @@ const GitPortfolio = () => {
     const hammerVisible = hammerStore((state) => state.hammerVisible);
     const [sign, setSign] = useState([]);
     const [errors, setErrors] = useState(false);
+    const [solved, setSolved] = useState(false);
 
     const BrokenSystemHandler = async () => {
         setClicksBeforeBroken(ClicksBeforeBroken + 1)
@@ -26,6 +27,17 @@ const GitPortfolio = () => {
             setQuestions(1);
         }
 
+    }
+
+    const NoHandle = async () => {
+        setSolved(true);
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        setErrors(false);
+        setBroken(false);
+        setSolved(false);
+        setSign([])
+        setQuestions(0)
+        setClicksBeforeBroken(0)
     }
 
 
@@ -370,6 +382,11 @@ const GitPortfolio = () => {
             </div>
             { Broken &&
                 <div className="flex flex-col justify-center items-center bg-black outline-0 w-screen h-screen z-50 fixed top-0 left-0">
+                    {solved &&
+                        <div className="w-200 h-100 border absolute outline-0 bg-black border-gray-600 rounded-xs flex flex-col z-100 items-center justify-center">
+                            <h1 className="font-normal text-green-500 text-5xl font-console">OK :)</h1>
+                        </div>
+                    }
                     { !Questions >= 1 &&
                         <div className="w-200 h-100 border border-gray-600 rounded-xs flex flex-col items-center justify-center">
                             <h1 className="font-normal text-red-600 text-5xl font-console">ERROR</h1>
@@ -380,7 +397,7 @@ const GitPortfolio = () => {
                             <h1>The portfolio is boring still wanna see it?</h1>
                             <div className="flex flex-row items-center justify-start py-3 px-4">
                                 <button onClick={() => {setQuestions(Questions + 1)}} className="p-1 border cursor-pointer border-gray-600 hover:bg-gray-900 w-12 rounded-md mx-1">YES</button>
-                                <button className="p-1 border border-gray-600 hover:bg-gray-900 mx-1 rounded-md w-12 cursor-pointer">NO</button>
+                                <button onClick={NoHandle} className="p-1 border border-gray-600 hover:bg-gray-900 mx-1 rounded-md w-12 cursor-pointer">NO</button>
                             </div>
                         </div>
                     }
@@ -389,7 +406,7 @@ const GitPortfolio = () => {
                             <h1>Do you really wanna see this portfolio? it's really boring</h1>
                             <div className="flex flex-row items-center justify-start py-3 px-4">
                                 <button onClick={() => {setQuestions(Questions + 1)}} className="cursor-pointer p-1 border w-12 rounded-md mx-1 border-gray-600 hover:bg-gray-900">YES</button>
-                                <button className="p-1 border border-gray-600 hover:bg-gray-900 w-12 rounded-md mx-1 cursor-pointer">NO</button>
+                                <button onClick={NoHandle} className="p-1 border border-gray-600 hover:bg-gray-900 w-12 rounded-md mx-1 cursor-pointer">NO</button>
                             </div>
                         </div>
                     }
@@ -406,7 +423,7 @@ const GitPortfolio = () => {
                                     NO
                                 </button>
 
-                                <button className="p-1 border cursor-pointer border-gray-600 hover:bg-gray-900 w-12 rounded-md mx-1">YES</button>
+                                <button onClick={NoHandle} className="p-1 border cursor-pointer border-gray-600 hover:bg-gray-900 w-12 rounded-md mx-1">YES</button>
                             </div>
                         </div>
                     }
@@ -420,6 +437,7 @@ const GitPortfolio = () => {
             {errors &&
                 <EveryThingBroke/>
             }
+
         </>
     )
 }
