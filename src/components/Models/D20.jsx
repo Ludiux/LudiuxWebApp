@@ -2,7 +2,7 @@ import React, {useRef, useState} from 'react'
 import { useGLTF } from '@react-three/drei'
 import {useFrame} from "@react-three/fiber";
 
-export function D20({setMedievalMode, medievalMode, ...props}) {
+export function D20({setTransition, setMedievalMode, medievalMode, ...props}) {
     const [shiny, setShiny] = useState(false);
     const [intensity, setIntensity] = useState(0);
     const diceRef = useRef(null);
@@ -37,10 +37,16 @@ export function D20({setMedievalMode, medievalMode, ...props}) {
         )
     }
 
-    const HandleClick = () => {
+    const HandleClick = async () => {
         const timer = setTimeout(() => {
             setMedievalMode(!medievalMode)
-        }, 1200)
+        }, 700)
+
+        setTransition(true);
+        await new Promise(resolve => setTimeout(resolve, 750))
+        setTransition(false);
+
+        console.log(medievalMode)
     }
 
     const { nodes, materials } = useGLTF('/d20.glb')
