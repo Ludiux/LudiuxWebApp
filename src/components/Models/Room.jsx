@@ -2,6 +2,8 @@
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
+
+
 function Room(props) {
     const { nodes, materials } = useGLTF('./room.glb')
     return (
@@ -53,6 +55,7 @@ function Room(props) {
                 position={[0, 0, -3]}
                 scale={[3.52, 2.6, 5]}
             />
+
         </group>
     )
 }

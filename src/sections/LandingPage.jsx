@@ -23,6 +23,8 @@ import Candle1 from "../components/Models/Candle1.jsx";
 import Candle2 from "../components/Models/Candle2.jsx";
 import HammerModel from "../components/Models/Hammer.jsx";
 import hammerStore from '../services/store.js'
+import { Audio, AudioLoader, AudioListener} from "three";
+import {useThree} from "@react-three/fiber";
 
 const MonitorScene = ({onFocus, setOnFocus, escapePressed, setActive, active, lookingAt, setLookingAt}) => {
     const open = useLoader(THREE.TextureLoader, '/assets/media/img/icons8-collapse-100.png')
@@ -66,6 +68,43 @@ const MonitorScene = ({onFocus, setOnFocus, escapePressed, setActive, active, lo
         </>
     )
 };
+
+const FreddyNose = () => {
+    const {camera} = useThree();
+
+    let freddysound;
+
+    const NoseClick = () => {
+        if (freddysound) {
+            freddysound.play(0);
+        }
+    };
+
+    useEffect(() => {
+        const listener = new AudioListener();
+        camera.add(listener);
+
+        freddysound = new Audio(listener);
+
+        const audio = new AudioLoader();
+
+        audio.load('/assets/media/audio/freddy.mp3', (buffer) => {
+            freddysound.setBuffer(buffer);
+            freddysound.setVolume(0.5);
+        });
+    });
+
+    return (
+        <mesh
+            position={[3.4, 1.8, -0.01]}
+            scale={[0.1, 0.1, 0.1]}
+            onClick={NoseClick}
+        >
+            <boxGeometry args={[1, 1, 1]} />
+            <meshStandardMaterial transparent={true} opacity={0} />
+        </mesh>
+    );
+}
 
 const Scene = ({onFocus, lookingAt, setLookingAt}) => {
     const meshRef = useRef()
@@ -196,6 +235,8 @@ const HammerAnimated = ({ setOnFocus }) => {
     const hammerVisible = hammerStore((state) => state.hammerVisible)
     const setHammerVisibility = hammerStore((state) => state.setHammerVisibility)
     const [animation, setAnimation] = useState(false)
+    const [screenBroken, setScreenBroken] = useState(false);
+
 
     const hammerRef = useRef()
     const start = new Vector3(1.4, 2, 0.5)
@@ -372,6 +413,7 @@ const LandingPage = () => {
                 <Speaker scale={[1.5, 1.5, 1.5]} position={[3.15, -0.2, -1.05]} rotation={[0, -1.3, 0]}/>
                 <Speaker scale={[1.5, 1.5, 1.5]} position={[3.1, -0.2, 1.17]} rotation={[0, -2, 0]}/>
                 <Speaker scale={[1.5, 1.5, 1.5]} position={[3.106, 0.13, 1.176]} rotation={[0, -2, 0]}/>
+                <FreddyNose/>
                 <Room position={[0, -2, 0.2]} receiveShadow/>
 
                 {medievalMode &&

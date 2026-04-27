@@ -1,27 +1,87 @@
-import React, { useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import hammerStore from '../services/store.js'
 
 const GitPortfolio = () => {
     const [ClicksBeforeBroken, setClicksBeforeBroken] = useState(0);
     const [Broken, setBroken] = useState(false);
-    const [Questions, setQuestions] = useState(1);
+    const [Questions, setQuestions] = useState(0);
     const hammerVisible = hammerStore((state) => state.hammerVisible);
     const [sign, setSign] = useState([]);
+    const [errors, setErrors] = useState(false);
 
     const BrokenSystemHandler = async () => {
         setClicksBeforeBroken(ClicksBeforeBroken + 1)
 
         if(ClicksBeforeBroken === 4){
 
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            setErrors(true);
+
+            await new Promise(resolve => setTimeout(resolve, 5000));
 
             setBroken(true);
+
+            await new Promise(resolve => setTimeout(resolve, 1200));
+
 
             setQuestions(1);
         }
 
     }
 
+
+    const EveryThingBroke = () => {
+        const [elements, setElements] = useState([]);
+        const [visibleCount, setVisibleCount] = useState(0);
+
+        // generar posiciones UNA vez
+        useEffect(() => {
+            const generated = Array.from({ length: 700 }).map((_, i) => ({
+                id: i,
+                x: Math.random() * 100,
+                y: Math.random() * 100
+            }));
+
+            setElements(generated);
+        }, []);
+
+        // aparición progresiva EXPONENCIAL
+        useEffect(() => {
+            if (elements.length === 0) return;
+
+            let count = 0;
+            let delay = 200; // arranca lento
+
+            const spawn = () => {
+                count++;
+                setVisibleCount(count);
+
+                delay *= 0.9; // acelera
+
+                if (count < elements.length) {
+                    setTimeout(spawn, delay);
+                }
+            };
+
+            setTimeout(spawn, delay);
+        }, [elements]);
+
+        return (
+            <>
+                {elements.slice(0, visibleCount).map((el) => (
+                    <div
+                        key={el.id}
+                        className="bg-gray-950 text-red-500 py-2 px-3 font-console border absolute z-10 border-gray-600"
+                        style={{
+                            top: `${el.y}%`,
+                            left: `${el.x}%`,
+                        }}
+                    >
+                        <h1>Error</h1>
+                    </div>
+                ))}
+            </>
+        );
+    };
     return (
         <>
             <div className="w-full h-full flex flex-col justify-center items-center" >
@@ -310,12 +370,17 @@ const GitPortfolio = () => {
             </div>
             { Broken &&
                 <div className="flex flex-col justify-center items-center bg-black outline-0 w-screen h-screen z-50 fixed top-0 left-0">
+                    { !Questions >= 1 &&
+                        <div className="w-200 h-100 border border-gray-600 rounded-xs flex flex-col items-center justify-center">
+                            <h1 className="font-normal text-red-600 text-5xl font-console">ERROR</h1>
+                        </div>
+                    }
                     { Questions === 1 &&
                         <div className="w-150 h-100 border border-gray-600 text-white rounded-xs flex flex-col items-center justify-center">
                             <h1>The portfolio is boring still wanna see it?</h1>
                             <div className="flex flex-row items-center justify-start py-3 px-4">
-                                <button onClick={() => {setQuestions(Questions + 1)}} className="p-1 border border-gray-600 hover:bg-gray-900 w-12 rounded-md mx-1">YES</button>
-                                <button className="p-1 border border-gray-600 hover:bg-gray-900 mx-1 rounded-md w-12">NO</button>
+                                <button onClick={() => {setQuestions(Questions + 1)}} className="p-1 border cursor-pointer border-gray-600 hover:bg-gray-900 w-12 rounded-md mx-1">YES</button>
+                                <button className="p-1 border border-gray-600 hover:bg-gray-900 mx-1 rounded-md w-12 cursor-pointer">NO</button>
                             </div>
                         </div>
                     }
@@ -323,8 +388,8 @@ const GitPortfolio = () => {
                         <div className="w-150 h-100 border border-gray-600 text-white rounded-xs flex flex-col items-center justify-center">
                             <h1>Do you really wanna see this portfolio? it's really boring</h1>
                             <div className="flex flex-row items-center justify-start py-3 px-4">
-                                <button onClick={() => {setQuestions(Questions + 1)}} className="p-1 border w-12 rounded-md mx-1 border-gray-600 hover:bg-gray-900">YES</button>
-                                <button className="p-1 border border-gray-600 hover:bg-gray-900 w-12 rounded-md mx-1">NO</button>
+                                <button onClick={() => {setQuestions(Questions + 1)}} className="cursor-pointer p-1 border w-12 rounded-md mx-1 border-gray-600 hover:bg-gray-900">YES</button>
+                                <button className="p-1 border border-gray-600 hover:bg-gray-900 w-12 rounded-md mx-1 cursor-pointer">NO</button>
                             </div>
                         </div>
                     }
@@ -337,11 +402,11 @@ const GitPortfolio = () => {
                                     window.location.origin
                                 );
                                     setQuestions(Questions + 1);}
-                                } className="p-1 border border-gray-600 hover:bg-gray-900 w-12 rounded-md mx-1">
+                                } className="p-1 cursor-pointer border border-gray-600 hover:bg-gray-900 w-12 rounded-md mx-1">
                                     NO
                                 </button>
 
-                                <button className="p-1 border border-gray-600 hover:bg-gray-900 w-12 rounded-md mx-1">YES</button>
+                                <button className="p-1 border cursor-pointer border-gray-600 hover:bg-gray-900 w-12 rounded-md mx-1">YES</button>
                             </div>
                         </div>
                     }
@@ -351,6 +416,9 @@ const GitPortfolio = () => {
                         </div>
                     }
                 </div>
+            }
+            {errors &&
+                <EveryThingBroke/>
             }
         </>
     )
