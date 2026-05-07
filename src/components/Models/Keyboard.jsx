@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import { useGLTF } from '@react-three/drei'
 
-function Keyboard(props) {
+function Keyboard({setLoading, ...props}) {
   const { nodes, materials } = useGLTF('./Keyboard.glb')
+  const hasRendered = useRef(false);
   return (
       <group {...props} dispose={null}>
         <group
@@ -18,6 +19,13 @@ function Keyboard(props) {
                 receiveShadow
                 geometry={nodes.Object_0.geometry}
                 material={materials.Alumunium_Blue_Sky_Case}
+                onAfterRender={() => {
+                  if (hasRendered.current) return;
+
+                  hasRendered.current = true;
+                  setLoading(false);
+                  console.log("SceneRender!");
+                }}
             />
             <mesh
                 castShadow

@@ -7,10 +7,33 @@
             rel="stylesheet"
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: black;
+        overflow: hidden;
+      }
+
+      #initial-loader {
+        position: fixed;
+        inset: 0;
+        transition: opacity 0.5s ease;
+        background: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 999999;
+      }
+
+    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>👤Ludiux | Fullstack Dev 💻 |</title>
   </head>
   <body>
+    <div id="initial-loader">
+      <img src="public/assets/media/gifs/loadingscreen.gif" alt="Loading..." />
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

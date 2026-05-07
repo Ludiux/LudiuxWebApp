@@ -5,7 +5,7 @@ import Subwoofer from "../components/Models/HometheaterSubwooffer.jsx";
 import Speaker from "../components/Models/Speaker";
 import Room from "../components/Models/Room.jsx";
 import Desk from "../components/Models/Desk.jsx";
-import {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Monitor from "../components/Models/Monitor.jsx";
 import Mouse from "../components/Models/Mouse.jsx";
 import Dell from "../components/Models/DellPC.jsx";
@@ -24,9 +24,11 @@ import Candle2 from "../components/Models/Candle2.jsx";
 import HammerModel from "../components/Models/Hammer.jsx";
 import hammerStore from '../services/store.js'
 import { Audio, AudioLoader, AudioListener} from "three";
+import { Perf } from 'r3f-perf'
 import {useThree} from "@react-three/fiber";
+import Banner from "../components/Models/MedievalBanner.jsx";
 
-const MonitorScene = ({onFocus, setOnFocus, escapePressed, setActive, active, lookingAt, setLookingAt}) => {
+const MonitorScene = ({medievalMode, setMedievalMode, onFocus, setOnFocus, escapePressed, setActive, active, lookingAt, setLookingAt}) => {
     const open = useLoader(THREE.TextureLoader, '/assets/media/img/icons8-collapse-100.png')
     const close = useLoader(THREE.TextureLoader, '/assets/media/img/icons8-expand-100.png')
     const texture = onFocus ? open : close;
@@ -51,6 +53,8 @@ const MonitorScene = ({onFocus, setOnFocus, escapePressed, setActive, active, lo
                  rotation={[0, -1.55, 0]}
                  onClick={monitorClick}
                  escapePressed={escapePressed}
+                 medievalMode={medievalMode}
+                 setMedievalMode={setMedievalMode}
                  setActive={setActive}
                  active={active}/>
             {!active &&
@@ -72,6 +76,7 @@ const MonitorScene = ({onFocus, setOnFocus, escapePressed, setActive, active, lo
 const FloatingCandles = ({transition}) => {
     const candle1 = useRef(null);
     const candle2 = useRef(null);
+    const candle3 = useRef(null);
     const [start, setStart] = useState(false);
 
     useEffect(() => {
@@ -87,31 +92,38 @@ const FloatingCandles = ({transition}) => {
         const t = state.clock.getElapsedTime()
 
         let y = 1 - Math.sin(t * 1.05) * 0.1;
-        let y2 = 1.15 - Math.sin(t * 1.1) * 0.1;
+        let y2 = 1.15 - Math.sin(-t * 1.1) * 0.1;
+        let y3 = 1.4 - Math.sin(t * 1.1) * 0.1;
 
-        const floatingPos = new Vector3(2.6, y, 0.85);
-        const floatingPos2 = new Vector3(2.8, y2, -1.2);
+        const floatingPos = new Vector3(2.6, y, 1.05);
+        const floatingPos2 = new Vector3(2.8, y2, -1.29);
+        const floatingPos3 = new Vector3(2.8, y3, -2);
 
 
         candle1.current.position.lerp(floatingPos, 0.1)
         candle2.current.position.lerp(floatingPos2, 0.1)
+        candle3.current.position.lerp(floatingPos3, 0.1)
     })
 
     useFrame((state) => {
         if(!transition) return;
 
-        const outPos = new Vector3(2.6, 2, 0.85);
-        const outPos2 = new Vector3(2.8, 2, -1.2);
+        const outPos = new Vector3(2.6, 3, 1.05);
+        const outPos2 = new Vector3(2.8, 3, -1.29);
+        const outPos3 = new Vector3(2.8, 3, -2);
 
-        candle1.current.position.lerp(outPos, 0.1)
-        candle2.current.position.lerp(outPos2, 0.1)
+        candle1.current.position.lerp(outPos, 0.01)
+        candle2.current.position.lerp(outPos2, 0.01)
+        candle3.current.position.lerp(outPos3, 0.01)
+
 
     })
 
     return (
         <>
-            <Candle1 ref={candle1} scale={[1.5, 1.8, 1.5]} position={[2.6, 3, 0.85]}/>
-            <Candle2 ref={candle2} scale={[1.5, 1.8, 1.5]} position={[2.8, 3.26, -1.2]}/>
+            <Candle1 ref={candle1} scale={[0.4, 0.4, 0.4]} position={[2.6, 10, 0.85]}/>
+            <Candle2 ref={candle2} scale={[1.5, 1.5, 1.5]} position={[2.8, 10.26, -1.2]}/>
+            <Candle1 ref={candle3} scale={[0.3, 0.4, 0.3]} position={[2.6, 10, 0.85]}/>
         </>
 
     )
@@ -132,9 +144,13 @@ const GrowingCandles = ({transition}) => {
         if (!start) return;
         if(transition) return;
         const scale = new Vector3(1.5, 1.8, 1.5);
+        const pos = new Vector3(2.9, 0.45, -1.5);
+        const pos2 = new Vector3(2.8, -0.055, 1.7);
 
         candleSetRef.current.scale.lerp(scale, 0.1)
         candleSetRef2.current.scale.lerp(scale, 0.1)
+        candleSetRef.current.position.lerp(pos, 0.1)
+        candleSetRef2.current.position.lerp(pos2, 0.1)
     })
 
     useFrame((state) => {
@@ -142,14 +158,15 @@ const GrowingCandles = ({transition}) => {
 
         const scale = new Vector3(1.5, 0, 1.5);
 
+
         candleSetRef.current.scale.lerp(scale, 0.1)
         candleSetRef2.current.scale.lerp(scale, 0.1)
     })
 
     return(
         <>
-            <Candles ref={candleSetRef} scale={[1.5, 0, 1.5]} position={[2.8, 0.46, -1.5]}/>
-            <Candles ref={candleSetRef2} scale={[1.5, 0, 1.5]} position={[2.8, -0.055, 1.7]}/>
+            <Candles ref={candleSetRef} scale={[1.5, 0, 1.5]} position={[2.8, 0.1, -1.5]}/>
+            <Candles ref={candleSetRef2} scale={[1.5, 0, 1.5]} position={[2.8, -0.8, 1.7]}/>
         </>
     )
 }
@@ -314,7 +331,7 @@ function LightHelper(){
                        shadow-bias={-0.0005}
                        shadow-normalBias={0.02}
                        distance={10}
-                       castShadow/>;
+                       />;
 }
 
 const HammerAnimated = ({ setOnFocus }) => {
@@ -412,13 +429,12 @@ const HammerAnimated = ({ setOnFocus }) => {
 //     return null
 // }
 
-const LandingPage = () => {
+const LandingPage = ({setLoading, transition, setTransition}) => {
     const [active, setActive] = useState(true)
     const [lookingAt, setLookingAt] = useState(0);
     const [medievalMode, setMedievalMode] = useState(false)
     const [onFocus, setOnFocus] = useState(false);
     const [animationEnd, setAnimationEnd] = useState(false);
-    const [transition, setTransition] = useState(false);
     const controls = useRef()
 
 
@@ -474,10 +490,12 @@ const LandingPage = () => {
                     <>
                         <LightHelper />
                         <Environment files="./balcony_2k.exr" background={true} environmentIntensity={1} backgroundBlurriness={0.1} />
+
                     </>
                 )
                 }
-                <ambientLight intensity={0.20} color={"#FF954F"}/>
+                <Perf/>
+                <ambientLight intensity={0.06} color={"#FF954F"}/>
                 <EffectComposer>
                     <Bloom  intensity={0.5}      // strength of glow
                             luminanceThreshold={0.8} // what glows
@@ -489,8 +507,17 @@ const LandingPage = () => {
                 {/*<LogCameraWithTarget controlsRef={controls}/>*/}
                 {/*<OrbitControls ref={controls} />*/}
                 <Dell scale={[0.5, 0.5, 0.5]} position={[2.8, -1.25, 1.73]} rotation={[0, 1.63, 0]} castShadow receiveShadow/>
-                <Keyboard scale={[1.3, 1.3, 1.3]} position={[2.8, -0.223, -1.14]} rotation={[0, -1.9, 0]} castShadow receiveShadow/>
-                <MonitorScene onFocus={onFocus} setOnFocus={setOnFocus} escapePressed={escapePressed} setActive={setActive} active={active} lookingAt={lookingAt} setLookingAt={setLookingAt} />
+                <Keyboard scale={[1.3, 1.3, 1.3]} position={[2.8, -0.223, -1.14]} rotation={[0, -1.9, 0]} setLoading={setLoading} castShadow receiveShadow/>
+                <MonitorScene onFocus={onFocus}
+                              setOnFocus={setOnFocus}
+                              escapePressed={escapePressed}
+                              setActive={setActive}
+                              active={active}
+                              lookingAt={lookingAt}
+                              setLookingAt={setLookingAt}
+                              medievalMode={medievalMode}
+                              setMedievalMode={setMedievalMode}
+                />
                 <MouseScene />
                 <WoodCube scale={[0.5, 0.5, 0.5]} position={[2.72, -0.08, 1.74]} rotation={[0, 1.6, 0]} onClick={cubeClick} castShadow receiveShadow/>
                 <WoodCube scale={[0.5, 0.5, 0.5]} position={[2.72, 1.055, 1.74]} rotation={[0, 1.6, 0]} onClick={cubeClick2} castShadow receiveShadow/>
@@ -508,6 +535,8 @@ const LandingPage = () => {
                     <>
                         <GrowingCandles transition={transition}/>
                         <FloatingCandles animationEnd={animationEnd} setAnimationEnd={setAnimationEnd} transition={transition}/>
+                        <Banner scale={[0.08, 0.08, 0.08]} position={[3.15, 2.1, 0.9]} rotation={[0, 1.6, 0]}/>
+                        <Banner scale={[0.08, 0.08, 0.08]} position={[3.15, 2.1, -1.08]} rotation={[0, 1.6, 0]}/>
                     </>
 
                 }

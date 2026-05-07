@@ -16,7 +16,7 @@ function Room(props) {
                 <group name="GLTF_SceneRootNode" rotation={[Math.PI / 2, 0, 0]}>
                     <group
                         name="Plane001_0"
-                        position={[0.0069, 2.1611, -0.0239]}
+                        position={[0.0069, 2.1611, -0.045]}
                         rotation={[1.5732, 0, 0]}
                         scale={[1.5028, 16.4513, 2.1121]}>
                         <mesh
@@ -24,8 +24,9 @@ function Room(props) {
                             receiveShadow
                             geometry={nodes.Object_5.geometry}
                             material={materials.Material}
-                            position={[-0.372, -0.2329, -3.4643]}
+                            position={[-0.372, -0.233, -3.4643]}
                             scale={1.9455}
+
                         />
                     </group>
                 </group>

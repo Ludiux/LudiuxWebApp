@@ -3,7 +3,7 @@ import {Html, useGLTF, useTexture} from '@react-three/drei'
 import hammerStore from "../../services/store.js";
 
 
-function Monitor({escapePressed, setActive, active, ...props}) {
+function Monitor({medievalMode, setMedievalMode, escapePressed, setActive, active, ...props}) {
     const hammerVisible = hammerStore((state) => state.hammerVisible);
     const setHammerVisibility = hammerStore((state) => state.setHammerVisibility);
     const [shiny, setShiny] = useState(false);
@@ -63,22 +63,23 @@ function Monitor({escapePressed, setActive, active, ...props}) {
 
                 {screenselect} {/*Dynamic Material Variable*/}
 
-                {!hammerVisible && (
-                    <Html
-                        zIndexRange={[zIndex, 0]}
-                        position={[0.001, -0, 0]}
-                        transform={true}
-                        rotation={[-1.57, -0, 0]}
-                        scale={[0.3015, 0.6, 1]}
-                        distanceFactor={1.336}
-                    >
-                        <iframe src="/Desktop" className={"w-480 h-245"} style={{
-                            border: "none",
-                            imageRendering: "auto"
-                        }} />
-                    </Html>
-                )
-                }
+                <Html
+                    zIndexRange={[zIndex, 0]}
+                    position={[0.001, -0, 0]}
+                    transform={true}
+                    rotation={[-1.57, -0, 0]}
+                    scale={[0.3015, 0.6, 1]}
+                    distanceFactor={1.336}
+                >
+                    <div className={`w-480 h-245`}>
+                        <iframe src="/Desktop"
+                                className={`absolute left-0 top-0 w-480 h-245 ${!medievalMode ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}
+                        />
+                        <iframe src="/MedievalScreen"
+                                className={`absolute left-0 top-0 w-480 h-245 ${medievalMode ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}
+                        />
+                    </div>
+                </Html>
 
 
 

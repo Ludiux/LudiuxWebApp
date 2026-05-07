@@ -1,53 +1,41 @@
-import React from 'react'
-import {useGLTF} from '@react-three/drei'
+import React, { useRef } from 'react'
+import { useGLTF } from '@react-three/drei'
 
 export function Candle1(props) {
+    const lightRef = useRef(null)
+
     const { nodes, materials } = useGLTF('/Candle1.glb')
     return (
         <group {...props} dispose={null}>
-            <group
-                name="candle_1_0"
-                position={[-0.002, 0.092, 0.005]}
-                rotation={[Math.PI / 2, 0, -0.969]}
-                scale={0.238}>
-                <group name="Object_4" position={[0.023, -0.007, 0.387]}>
-                    <mesh
-                        name="Object_0"
-                        castShadow
-                        receiveShadow
-                        geometry={nodes.Object_0.geometry}
-                        material={materials.Candle_1}
-                        morphTargetDictionary={nodes.Object_0.morphTargetDictionary}
-                        morphTargetInfluences={nodes.Object_0.morphTargetInfluences}
-                    />
-                    <mesh
-                        name="Object_0_1"
-                        castShadow
-                        receiveShadow
-                        geometry={nodes.Object_0_1.geometry}
-                        material={materials.Flame}
-                        morphTargetDictionary={nodes.Object_0_1.morphTargetDictionary}
-                        morphTargetInfluences={nodes.Object_0_1.morphTargetInfluences}
-                    />
-
-                    <pointLight
-                        scale={[0.2, 0.2, 0.2]}
-                        position={[0, -0, -1]}
-                        color={"#fae446"}
-                        intensity={2} decay={2}
-                        shadow-mapSize-width={2048}
-                        shadow-mapSize-height={2048}
-                        shadow-bias={-0.0005}
-                        shadow-normalBias={0.02}
-                        distance={6}
-                        castShadow
-                    />
-                </group>
+            <group position={[0, 0.352, 0]} rotation={[1.574, 0, 0]}>
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_0001.geometry}
+                    material={materials['Candle_1.001']}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Object_0001_1.geometry}
+                    material={materials['Flame.001']}
+                />
             </group>
+            <pointLight
+                ref={lightRef}
+                position={[0, 0.82, 0]}
+                color={"#FF954F"}
+                intensity={2.4} decay={1}
+                shadow-mapSize-width={2048}
+                shadow-mapSize-height={2048}
+                shadow-bias={-0.001}
+                shadow-normalBias={0.1}
+                distance={1.8}
+            />
         </group>
     )
 }
 
 useGLTF.preload('/Candle1.glb')
 
-export default Candle1;
+export default Candle1
