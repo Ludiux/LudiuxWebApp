@@ -347,13 +347,20 @@ function LightHelper(){
 const HammerAnimated = ({ setOnFocus }) => {
     const hammerVisible = hammerStore((state) => state.hammerVisible)
     const setHammerVisibility = hammerStore((state) => state.setHammerVisibility)
-    const [animation, setAnimation] = useState(false)
+    const [animation, setAnimation] = useState(0)
     const [screenBroken, setScreenBroken] = useState(false);
 
 
     const hammerRef = useRef()
     const start = new Vector3(1.4, 2, 0.5)
     const end = new Vector3(1.4, 0.3, 0.5)
+    const idlePos = new Vector3(1.4, 0.3, 0.5)
+    const windupPos = new Vector3(1, 0.8, 0.5)
+    const slamPos = new Vector3(2.5, 0, 0.6)
+    const idleRot = 0
+    const windupRot = -0.4
+    const slamRot = 0.6
+    const [animPos, setAnimPos] = useState(0)
     const startTime = useRef(null)
     const startAnimationTime = useRef(null)
 
@@ -395,21 +402,57 @@ const HammerAnimated = ({ setOnFocus }) => {
 
         const elapsed = state.clock.elapsedTime - startTime.current
 
-
         if(!animation){
             if (elapsed > 1.5) {
                 hammerRef.current.position.lerp(end, 0.03)
             }
         }else{
-            if (startTime.current === null) {
+            if (startAnimationTime.current === null) {
                 startAnimationTime.current = state.clock.elapsedTime
             }
-            const animationTime = state.clock.elapsedTime - startTime.current
+            const animationTime = state.clock.elapsedTime - startAnimationTime.current;
 
-            if(animationTime < 0.6){
+            switch (animation) {
+                case 1:
+                    hammerRef.current.position.lerp(idlePos, 0.03)
+                    hammerRef.current.rotation.z =
+                        THREE.MathUtils.lerp(
+                            hammerRef.current.rotation.z,
+                            idleRot,
+                            0.01
+                        )
+                    if(animationTime >= 0.6) {
+                        setAnimation(2)
+                    }
+                    break
+                case 2:
+                    hammerRef.current.position.lerp(windupPos, 0.01)
+                    hammerRef.current.rotation.z =
+                        THREE.MathUtils.lerp(
+                            hammerRef.current.rotation.z,
+                            windupRot,
+                            0.01
+                        )
+                    if(animationTime >= 3) {
+                        setAnimation(3)
+                    }
+                    break
+                case 3:
+                    hammerRef.current.position.lerp(slamPos, 0.3)
+                    hammerRef.current.rotation.z =
+                        THREE.MathUtils.lerp(
+                            hammerRef.current.rotation.z,
+                            slamRot,
+                            0.1
+                        )
+                    break
+
 
             }
+
+
         }
+
     })
 
     if (!hammerVisible) return null
@@ -417,6 +460,10 @@ const HammerAnimated = ({ setOnFocus }) => {
     return (
         <HammerModel
             ref={hammerRef}
+            onClick={(e) => {
+                setAnimation(1)
+                startAnimationTime.current = null
+            }}
             scale={[0.6, 0.6, 0.6]}
             position={[1.4, 2, 0.5]}
             rotation={[0, -3, 0]}
@@ -446,6 +493,7 @@ const LandingPage = ({setLoading, transition, setTransition}) => {
     const [onFocus, setOnFocus] = useState(false);
     const [animationEnd, setAnimationEnd] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const [screenBroken, setScreenBroken] = useState(false);
     const controls = useRef()
     const musicRef = useRef();
 

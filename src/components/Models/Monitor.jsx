@@ -63,7 +63,7 @@ function Monitor({medievalMode, setMedievalMode, escapePressed, setActive, isMob
 
                 {screenselect} {/*Dynamic Material Variable*/}
 
-                <Html
+                { !hammerVisible && (<Html
                     zIndexRange={[zIndex, 0]}
                     position={[0.001, -0, 0]}
                     transform={true}
@@ -79,7 +79,7 @@ function Monitor({medievalMode, setMedievalMode, escapePressed, setActive, isMob
                                 className={`absolute left-0 top-0 w-480 h-245 ${medievalMode ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}
                         />
                     </div>
-                </Html>
+                </Html>) }
 
 
 
