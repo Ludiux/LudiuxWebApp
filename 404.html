@@ -19,24 +19,36 @@
         position: fixed;
         inset: 0;
         transition: opacity 0.5s ease;
-        background: black;
+        background: #17123b;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
         z-index: 999999;
         pointer-events: none;
       }
+      #loader-gif {
+        width: 70vw;
+        height: 70vh;
+        object-fit: cover;
+      }
 
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>👤Ludiux | Fullstack Dev 💻 |</title>
-    <script type="module" crossorigin src="/assets/index-chS-tXIs.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DffgwfZR.css">
+    <script type="module" crossorigin src="/assets/index-yZ-wyoxh.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-ifa9pUuO.css">
   </head>
   <body>
-    <div id="initial-loader">
-      <img src="/assets/loadingscreen-D4XCqmPU.gif" alt="Loading..." />
-    </div>
+  <div id="initial-loader">
+    <img
+            id="loader-gif"
+            src="/assets/media/gifs/LogoLoading.gif"
+            alt="Loading..."
+    />
+  </div>
     <div id="root"></div>
   </body>
 </html>
