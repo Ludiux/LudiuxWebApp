@@ -2,6 +2,7 @@ import React from 'react'
 import Body from "../../components/Body.jsx";
 import Taskbar from "../../components/Taskbar.jsx";
 import { motion } from "framer-motion";
+import {LoaderManager} from "../NotFound.jsx";
 
 let last = null
 
@@ -32,6 +33,7 @@ const Desktop = () => {
     return (
         <motion.div
             className="min-h-screen bg-no-repeat bg-cover" style={{ backgroundImage: `url(${Wallpaper})` }}>
+            <LoaderManager />
             <Body />
             <Taskbar/>
         </motion.div>

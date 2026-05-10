@@ -1,9 +1,22 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
+
+
+
+export function LoaderManager() {
+
+    const loader = document.getElementById("initial-loader");
+    loader.style.opacity = "0";
+
+    return null;
+}
+
+
 const NotFound = () => {
     return (
         <>
+            <LoaderManager/>
 
             <div className="flex flex-col items-center bg-[#191437] text-[#FDC800] h-lvh font-pixels m-0 p-0">
 

@@ -1,15 +1,11 @@
 import LandingPage from "./sections/LandingPage.jsx";
-import {useState, useEffect, useRef} from "react";
+import {useState, useEffect} from "react";
 
 function App(close, setClose) {
     const [transition, setTransition] = useState(false);
     const [loading, setLoading] = useState(true);
 
     function LoaderManager() {
-
-        const frames = useRef(0);
-        const [ready, setReady] = useState(false);
-
 
         useEffect(() => {
             if (loading) return;
@@ -20,15 +16,26 @@ function App(close, setClose) {
                 frame++;
 
                 if (frame > 60) {
-                    const loader = document.getElementById("initial-loader");
 
-                    if (loader) {
+                    const gif = document.getElementById("loader-gif");
+
+                    if (!gif) return;
+
+                    gif.src = "/assets/media/gifs/LodingFinished.gif";
+
+                    setTimeout(() => {
+
+                        const loader = document.getElementById("initial-loader");
+
+                        if (!loader) return;
+
                         loader.style.opacity = "0";
 
                         setTimeout(() => {
                             loader.remove();
                         }, 500);
-                    }
+
+                    }, 6000);
 
                     return;
                 }
@@ -37,6 +44,7 @@ function App(close, setClose) {
             }
 
             requestAnimationFrame(tick);
+
         }, [loading]);
 
         return null;

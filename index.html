@@ -19,11 +19,20 @@
         position: fixed;
         inset: 0;
         transition: opacity 0.5s ease;
-        background: black;
+        background: #17123b;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
         z-index: 999999;
+        pointer-events: none;
+      }
+      #loader-gif {
+        width: 70vw;
+        height: 70vh;
+        object-fit: cover;
       }
 
     </style>
@@ -31,9 +40,13 @@
     <title>👤Ludiux | Fullstack Dev 💻 |</title>
   </head>
   <body>
-    <div id="initial-loader">
-      <img src="public/assets/media/gifs/loadingscreen.gif" alt="Loading..." />
-    </div>
+  <div id="initial-loader">
+    <img
+            id="loader-gif"
+            src="/assets/media/gifs/LogoLoading.gif"
+            alt="Loading..."
+    />
+  </div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

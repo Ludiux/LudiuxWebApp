@@ -3,7 +3,7 @@ import {Html, useGLTF, useTexture} from '@react-three/drei'
 import hammerStore from "../../services/store.js";
 
 
-function Monitor({medievalMode, setMedievalMode, escapePressed, setActive, active, ...props}) {
+function Monitor({medievalMode, setMedievalMode, escapePressed, setActive, isMobile, active, ...props}) {
     const hammerVisible = hammerStore((state) => state.hammerVisible);
     const setHammerVisibility = hammerStore((state) => state.setHammerVisibility);
     const [shiny, setShiny] = useState(false);

@@ -73,6 +73,16 @@ const MonitorScene = ({medievalMode, setMedievalMode, onFocus, setOnFocus, escap
     )
 };
 
+const Music = ( {musicRef} ) => {
+    return (
+        <>
+            <audio id="audio" loop autoPlay={true} ref={musicRef}>
+                <source src="/assets/media/audio/ASillyPlaylist.mp3" type="audio/mpeg"/>
+            </audio>
+        </>
+    )
+}
+
 const FloatingCandles = ({transition}) => {
     const candle1 = useRef(null);
     const candle2 = useRef(null);
@@ -435,8 +445,23 @@ const LandingPage = ({setLoading, transition, setTransition}) => {
     const [medievalMode, setMedievalMode] = useState(false)
     const [onFocus, setOnFocus] = useState(false);
     const [animationEnd, setAnimationEnd] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
     const controls = useRef()
+    const musicRef = useRef();
 
+    useEffect(() => {
+        const checkScreen = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        checkScreen();
+
+        window.addEventListener("resize", checkScreen);
+
+        return () => {
+            window.removeEventListener("resize", checkScreen);
+        };
+    }, []);
 
     const escapePressed = useKeyboardControls(
         (state) => state[Controls.escape]
@@ -481,6 +506,7 @@ const LandingPage = ({setLoading, transition, setTransition}) => {
                     Press Escape or touch the blue led to exit!
                 </Alert>
             </Snackbar>
+            <Music musicRef={musicRef}/>
             <Canvas
                 className="w-full h-full absolute inset-0"
                 camera={{ position: [-0.37, 1, -0.1], fov: 40 }}
@@ -502,7 +528,24 @@ const LandingPage = ({setLoading, transition, setTransition}) => {
                             luminanceSmoothing={0.3}/>
                 </EffectComposer>
                 {/*<Perf position="top-left" />*/}
-                <Scene onFocus={onFocus} lookingAt={lookingAt} setLookingAt={setLookingAt} />
+                {!isMobile ? (
+                    <Scene onFocus={onFocus} lookingAt={lookingAt} setLookingAt={setLookingAt}/>
+                ):(
+                    <OrbitControls
+                        target={[3.09, 0.5, -0.14]}
+                        enableDamping
+                        dampingFactor={0.05}
+                        rotateSpeed={0.3}
+                        enableZoom={false}
+                        enablePan={false}
+                        enableRotate={false}
+                        minPolarAngle={Math.PI / 2}
+                        maxPolarAngle={Math.PI / 2}
+                        minAzimuthAngle={-Math.PI / 1.3}
+                        maxAzimuthAngle={Math.PI / -2.8}
+                    />
+                )
+                }
                 <HammerAnimated setOnFocus={setOnFocus}/>
                 {/*<LogCameraWithTarget controlsRef={controls}/>*/}
                 {/*<OrbitControls ref={controls} />*/}
@@ -524,7 +567,7 @@ const LandingPage = ({setLoading, transition, setTransition}) => {
                 <Desk scale={[1.37, 1.2, 1.37]} position={[2.75, -0.7, -0.15]} rotation={[0, -1.57, 0]} castShadow receiveShadow/>
                 <Bag scale={[0.22, 0.22, 0.22]} position={[3, -0.6, -0.1]} rotation={[-1.6, 0, 1]}/>
                 <D20 scale={[0.05, 0.05, 0.05]} position={[2.8, -0.62, -0.22]} setMedievalMode={setMedievalMode} medievalMode={medievalMode} setTransition={setTransition} />
-                <Subwoofer scale={[0.18, 0.18, 0.18]} position={[2.87, 0.12, -1.48]} rotation={[0, -3.1, 0]} castShadow receiveShadow />
+                <Subwoofer musicRef={musicRef} scale={[0.18, 0.18, 0.18]} position={[2.87, 0.12, -1.48]} rotation={[0, -3.1, 0]} castShadow receiveShadow />
                 <Speaker scale={[1.5, 1.5, 1.5]} position={[3.15, -0.2, -1.05]} rotation={[0, -1.3, 0]}/>
                 <Speaker scale={[1.5, 1.5, 1.5]} position={[3.1, -0.2, 1.17]} rotation={[0, -2, 0]}/>
                 <Speaker scale={[1.5, 1.5, 1.5]} position={[3.106, 0.13, 1.176]} rotation={[0, -2, 0]}/>
