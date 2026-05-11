@@ -29,7 +29,7 @@
         z-index: 999999;
         pointer-events: none;
       }
-      #loader-gif {
+      #loader-video {
         width: 70vw;
         height: 70vh;
         object-fit: cover;
@@ -38,16 +38,35 @@
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>👤Ludiux | Fullstack Dev 💻 |</title>
-    <script type="module" crossorigin src="/assets/index-B8Phk2MM.js"></script>
+    <script type="module" crossorigin src="/assets/index-X_RgYAM-.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-ifa9pUuO.css">
   </head>
   <body>
   <div id="initial-loader">
-    <img
-            id="loader-gif"
-            src="/assets/media/gifs/LogoLoading.gif"
-            alt="Loading..."
-    />
+    <video
+            id="loader-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+    >
+      <source
+              src="/assets/media/webM/LoadingAnim.webm"
+              type="video/webm"
+      />
+    </video>
+    <video
+            id="preload-outro"
+            preload="auto"
+            muted
+            style="display:none;"
+    >
+      <source
+              src="/assets/media/webM/LoadingAnim.webm"
+              type="video/webm"
+      />
+    </video>
   </div>
     <div id="root"></div>
   </body>
