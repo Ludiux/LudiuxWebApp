@@ -344,11 +344,10 @@ function LightHelper(){
                        />;
 }
 
-const HammerAnimated = ({ setOnFocus }) => {
+const HammerAnimated = ({ setScreenBroken, setOnFocus }) => {
     const hammerVisible = hammerStore((state) => state.hammerVisible)
     const setHammerVisibility = hammerStore((state) => state.setHammerVisibility)
     const [animation, setAnimation] = useState(0)
-    const [screenBroken, setScreenBroken] = useState(false);
 
 
     const hammerRef = useRef()
@@ -379,6 +378,14 @@ const HammerAnimated = ({ setOnFocus }) => {
         return () => clearTimeout(timer)
 
     }, [hammerVisible])
+
+    const handleHammerClick = async () => {
+        setAnimation(1)
+        startAnimationTime.current = null
+
+        await new Promise(resolve => setTimeout(resolve, 5000));
+        setScreenBroken(true)
+    }
 
     useEffect(() => {
         const handler = (event) => {
@@ -461,8 +468,7 @@ const HammerAnimated = ({ setOnFocus }) => {
         <HammerModel
             ref={hammerRef}
             onClick={(e) => {
-                setAnimation(1)
-                startAnimationTime.current = null
+                handleHammerClick()
             }}
             scale={[0.6, 0.6, 0.6]}
             position={[1.4, 2, 0.5]}
@@ -594,7 +600,7 @@ const LandingPage = ({setLoading, transition, setTransition}) => {
                     />
                 )
                 }
-                <HammerAnimated setOnFocus={setOnFocus}/>
+                <HammerAnimated setScreenBroken={setScreenBroken} setOnFocus={setOnFocus}/>
                 {/*<LogCameraWithTarget controlsRef={controls}/>*/}
                 {/*<OrbitControls ref={controls} />*/}
                 <Dell scale={[0.5, 0.5, 0.5]} position={[2.8, -1.25, 1.73]} rotation={[0, 1.63, 0]} castShadow receiveShadow/>
@@ -610,7 +616,7 @@ const LandingPage = ({setLoading, transition, setTransition}) => {
                               setMedievalMode={setMedievalMode}
                 />
                 <MouseScene />
-                <WoodCube scale={[0.5, 0.5, 0.5]} position={[2.72, -0.08, 1.74]} rotation={[0, 1.6, 0]} onClick={cubeClick} castShadow receiveShadow/>
+                <WoodCube scale={[0.5, 0.5, 0.5]} position={[2.7, -0.08, 1.73]} rotation={[0, 1.6, 0]} onClick={cubeClick} castShadow receiveShadow/>
                 <WoodCube scale={[0.5, 0.5, 0.5]} position={[2.72, 1.055, 1.74]} rotation={[0, 1.6, 0]} onClick={cubeClick2} castShadow receiveShadow/>
                 <Desk scale={[1.37, 1.2, 1.37]} position={[2.75, -0.7, -0.15]} rotation={[0, -1.57, 0]} castShadow receiveShadow/>
                 <Bag scale={[0.22, 0.22, 0.22]} position={[3, -0.6, -0.1]} rotation={[-1.6, 0, 1]}/>

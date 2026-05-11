@@ -17,13 +17,26 @@ function App(close, setClose) {
 
                 if (frame > 60) {
 
-                    const gif = document.getElementById("loader-gif");
+                    const video = document.getElementById("loader-video");
 
-                    if (!gif) return;
+                    if (!video) return;
 
-                    gif.src = "/assets/media/gifs/LodingFinished.gif";
+                    video.loop = false;
 
-                    setTimeout(() => {
+                    video.pause();
+
+                    video.querySelector("source").src =
+                        "/assets/media/webM/LoadedAnim.webm";
+
+                    video.load();
+
+                    video.oncanplay = async () => {
+
+                        await video.play();
+
+                    };
+
+                    video.onended = () => {
 
                         const loader = document.getElementById("initial-loader");
 
@@ -34,8 +47,7 @@ function App(close, setClose) {
                         setTimeout(() => {
                             loader.remove();
                         }, 500);
-
-                    }, 6000);
+                    };
 
                     return;
                 }
