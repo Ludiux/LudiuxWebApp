@@ -69,11 +69,7 @@ export default function Subwoofer({musicRef, ...props}) {
         };
     }, []);
 
-    useEffect(() => {
-        if (musicRef?.current) {
-            musicRef.current.volume = 0.5;
-        }
-    }, []);
+
 
     useEffect(() => {
         if (modelRef.current) {

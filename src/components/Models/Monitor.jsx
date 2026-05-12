@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import {Html, useGLTF, useTexture} from '@react-three/drei'
+import {Html, useGLTF, useTexture, useVideoTexture} from '@react-three/drei'
 import hammerStore from "../../services/store.js";
 
 
-function Monitor({medievalMode, setMedievalMode, escapePressed, setActive, isMobile, active, ...props}) {
+function Monitor({screenBroken, medievalMode, setMedievalMode, escapePressed, setActive, isMobile, active, ...props}) {
     const hammerVisible = hammerStore((state) => state.hammerVisible);
     const setHammerVisibility = hammerStore((state) => state.setHammerVisibility);
     const [shiny, setShiny] = useState(false);
@@ -12,6 +12,8 @@ function Monitor({medievalMode, setMedievalMode, escapePressed, setActive, isMob
     let screenselect = <meshStandardMaterial color="#282828" metalness={0.96} roughness={0}/>;
     let power = <meshStandardMaterial color="#FF0000" emissive="red" emissiveIntensity={2}/>;
     const brokenTexture = useTexture("/assets/media/img/BreakIt.png")
+    const brokenGlassTexture = useTexture("/assets/media/img/brokenGlassTexture2.png")
+    const portal = useVideoTexture("/assets/media/webM/Portal2.webm")
 
     useEffect(() => {
         brokenTexture.repeat.y = -1
@@ -21,11 +23,12 @@ function Monitor({medievalMode, setMedievalMode, escapePressed, setActive, isMob
     if(active) {
         screenselect = shiny ? <meshStandardMaterial color="#282828" emissive="white" emissiveIntensity={1.3}/> :
             <meshStandardMaterial color="#282828" metalness={0.96} roughness={0}/>
+    }else{
+            screenselect = <meshBasicMaterial map={screenBroken ? brokenGlassTexture : brokenTexture } transparent color="#888888"/>
     }
 
-    if(!active) {
-        screenselect = <meshBasicMaterial map={brokenTexture}/>
-    }
+
+
 
     power = !powerOn ?
         <meshStandardMaterial color="#FF0000" emissive="red" emissiveIntensity={7}/> :
@@ -56,7 +59,6 @@ function Monitor({medievalMode, setMedievalMode, escapePressed, setActive, isMob
                 castShadow
                 receiveShadow
                 geometry={nodes.Plane.geometry}
-                material={materials['Material.002']}
                 position={[0, 0.232156, 0.009542]}
                 rotation={[Math.PI / 2, 0, 0]}
                 scale={[0.267375, 0.15038, 0.15038]}>
@@ -82,7 +84,17 @@ function Monitor({medievalMode, setMedievalMode, escapePressed, setActive, isMob
                 </Html>) }
 
 
+            </mesh>
 
+            <mesh
+                castShadow
+                receiveShadow
+                position={[0, 0.232156, 0.009042]}
+                rotation={[0, 0, 0]}
+                scale={[0.267375, 0.15038, 0.15038]}
+                >
+                <planeGeometry args={[1.9, 1.9]}/>
+                <meshBasicMaterial map={portal} />
             </mesh>
 
             <mesh

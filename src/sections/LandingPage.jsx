@@ -28,7 +28,7 @@ import { Perf } from 'r3f-perf'
 import {useThree} from "@react-three/fiber";
 import Banner from "../components/Models/MedievalBanner.jsx";
 
-const MonitorScene = ({medievalMode, setMedievalMode, onFocus, setOnFocus, escapePressed, setActive, active, lookingAt, setLookingAt}) => {
+const MonitorScene = ({screenBroken, medievalMode, setMedievalMode, onFocus, setOnFocus, escapePressed, setActive, active, lookingAt, setLookingAt}) => {
     const open = useLoader(THREE.TextureLoader, '/assets/media/img/icons8-collapse-100.png')
     const close = useLoader(THREE.TextureLoader, '/assets/media/img/icons8-expand-100.png')
     const texture = onFocus ? open : close;
@@ -55,6 +55,7 @@ const MonitorScene = ({medievalMode, setMedievalMode, onFocus, setOnFocus, escap
                  escapePressed={escapePressed}
                  medievalMode={medievalMode}
                  setMedievalMode={setMedievalMode}
+                 screenBroken={screenBroken}
                  setActive={setActive}
                  active={active}/>
             {!active &&
@@ -74,6 +75,43 @@ const MonitorScene = ({medievalMode, setMedievalMode, onFocus, setOnFocus, escap
 };
 
 const Music = ( {musicRef} ) => {
+
+    let n = Math.floor(Math.random() * 8) + 1;
+    let song = 0;
+
+    switch (n) {
+        case 1:
+            song = 0
+            break
+        case 2:
+            song = 96
+            break
+        case 3:
+            song = 290
+            break
+        case 4:
+            song = 451
+            break
+        case 5:
+            song = 527
+            break
+        case 6:
+            song = 562
+            break
+        case 7:
+            song = 857
+            break
+        case 8:
+            song = 1409
+            break
+    }
+
+    useEffect(() => {
+        if (musicRef?.current) {
+            musicRef.current.volume = 0.5;
+            musicRef.current.currentTime = song;
+        }
+    }, []);
     return (
         <>
             <audio id="audio" loop autoPlay={true} ref={musicRef}>
@@ -355,7 +393,7 @@ const HammerAnimated = ({ setScreenBroken, setOnFocus }) => {
     const end = new Vector3(1.4, 0.3, 0.5)
     const idlePos = new Vector3(1.4, 0.3, 0.5)
     const windupPos = new Vector3(1, 0.8, 0.5)
-    const slamPos = new Vector3(2.5, 0, 0.6)
+    const slamPos = new Vector3(2.75, -0.1, 0.2)
     const idleRot = 0
     const windupRot = -0.4
     const slamRot = 0.6
@@ -428,7 +466,8 @@ const HammerAnimated = ({ setScreenBroken, setOnFocus }) => {
                             idleRot,
                             0.01
                         )
-                    if(animationTime >= 0.6) {
+                    setScreenBroken(false)
+                    if(animationTime >= 0.1) {
                         setAnimation(2)
                     }
                     break
@@ -452,6 +491,12 @@ const HammerAnimated = ({ setScreenBroken, setOnFocus }) => {
                             slamRot,
                             0.1
                         )
+                    if(animationTime >= 3.15) {
+                        setAnimation(4)
+                    }
+                    break
+                case 4:
+                    setScreenBroken(true)
                     break
 
 
@@ -609,6 +654,7 @@ const LandingPage = ({setLoading, transition, setTransition}) => {
                               setOnFocus={setOnFocus}
                               escapePressed={escapePressed}
                               setActive={setActive}
+                              screenBroken={screenBroken}
                               active={active}
                               lookingAt={lookingAt}
                               setLookingAt={setLookingAt}
