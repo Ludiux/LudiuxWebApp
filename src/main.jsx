@@ -11,6 +11,7 @@ import Desktop from "./sections/SubSections/Desktop.jsx";
 import TabGithub from "./sections/SubSections/TabGithub.jsx";
 import Contact from "./sections/SubSections/Contact.jsx";
 import MedievalScreen from "./sections/MedievalScreen.jsx";
+import PortalGit from "./components/Portal.jsx";
 
 
 const map = [
@@ -35,6 +36,7 @@ createRoot(document.getElementById('root')).render(
                 <Route path="/Desktop" element={<Desktop />} />
                 <Route path="/Browser" element={<Browser />} />
                 <Route path="/TabGithub" element={<TabGithub />} />
+                <Route path="/Portal" element={<PortalGit />} />
                 <Route path="/MedievalScreen" element={<MedievalScreen />} />
                 <Route path="/Contact" element={<Contact />} />
                 <Route path="*" element={<NotFound />} />

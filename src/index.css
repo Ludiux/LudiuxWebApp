@@ -23,11 +23,51 @@
     font-weight: normal;
     font-display: swap;
 }
+@font-face {
+    font-family: Runaria;
+    src: url(../public/assets/fonts/Ruritania.woff2) format(woff2),
+    url(../public/assets/fonts/Ruritania.woff) format(woff);
+    font-weight: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: blackletter;
+    src: url(../public/assets/fonts/BerkahiBlackletter.woff2) format(woff2),
+    url(../public/assets/fonts/BerkahiBlackletter.woff) format(woff);
+    font-weight: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: seagram;
+    src: url(../public/assets/fonts/Seagram.woff2) format(woff2),
+    url(../public/assets/fonts/Seagram.woff) format(woff);
+    font-weight: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: faith;
+    src: url(../public/assets/fonts/FaithCollapsing.woff2) format(woff2),
+    url(../public/assets/fonts/FaithCollapsing.woff) format(woff);
+    font-weight: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: ithorn;
+    src: url(../public/assets/fonts/Ithorn.woff2) format(woff2),
+    url(../public/assets/fonts/Ithorn.woff) format(woff);
+    font-weight: normal;
+    font-display: swap;
+}
 
 
 @theme{
     --font-pixels: pixels, "sans-serif";
     --font-gameboy: "gameboy", "sans-serif";
     --font-console: "console", "sans-serif";
+    --font-runaria: "runaria", "sans-serif";
+    --font-blackletter: "blackletter", "sans-serif";
+    --font-seagram: "seagram", "sans-serif";
+    --font-ithorn: "ithorn", "sans-serif";
+    --font-fe: "faith", "sans-serif";
 }
 

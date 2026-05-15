@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import {Html, useGLTF, useTexture, useVideoTexture} from '@react-three/drei'
 import hammerStore from "../../services/store.js";
+import { useNavigate } from "react-router-dom"
 
 
 function Monitor({screenBroken, medievalMode, setMedievalMode, escapePressed, setActive, isMobile, active, ...props}) {
     const hammerVisible = hammerStore((state) => state.hammerVisible);
     const setHammerVisibility = hammerStore((state) => state.setHammerVisibility);
+    const navigate = useNavigate();
     const [shiny, setShiny] = useState(false);
     const [powerOn, setPower] = useState(false);
 
@@ -36,7 +38,6 @@ function Monitor({screenBroken, medievalMode, setMedievalMode, escapePressed, se
 
     const zIndex = active ? -100 : 0
 
-
     useEffect(() => {
         if (escapePressed) {
             setActive(true)
@@ -55,7 +56,12 @@ function Monitor({screenBroken, medievalMode, setMedievalMode, escapePressed, se
                 name="Plane"
                 onPointerEnter={() => setShiny(true)}
                 onPointerLeave={() => setShiny(false)}
-                onClick={() => setActive(false)}
+
+                onClick={() => {
+                    if(!screenBroken){
+                        setActive(false)
+                    }
+                }}
                 castShadow
                 receiveShadow
                 geometry={nodes.Plane.geometry}
@@ -86,23 +92,37 @@ function Monitor({screenBroken, medievalMode, setMedievalMode, escapePressed, se
 
             </mesh>
 
-            <mesh
-                castShadow
-                receiveShadow
-                position={[0, 0.232156, 0.009042]}
-                rotation={[0, 0, 0]}
-                scale={[0.267375, 0.15038, 0.15038]}
+            {screenBroken && (
+                <mesh
+                    castShadow
+                    receiveShadow
+                    onClick={() => navigate("/Portal")}
+                    position={[0, 0.232156, 0.009042]}
+                    rotation={[0, 0, 0]}
+                    onPointerOver={() => {
+                        document.body.style.cursor = "pointer"
+                    }}
+                    onPointerOut={() => {
+                        document.body.style.cursor = "default"
+                    }}
+                    scale={[0.267375, 0.15038, 0.15038]}
                 >
-                <planeGeometry args={[1.9, 1.9]}/>
-                <meshBasicMaterial map={portal} />
-            </mesh>
+                    <planeGeometry args={[1.9, 1.9]}/>
+                    <meshBasicMaterial map={portal} />
+                </mesh>
+            )
+
+            }
 
             <mesh
                 name="Твердое_тело1001"
                 onPointerEnter={() => setShiny(true)}
                 onPointerLeave={() => setShiny(false)}
-                onClick={() => setActive(!active)}
-                castShadow
+                onClick={() => {
+                    if(!screenBroken){
+                        setActive(false)
+                    }
+                }}                castShadow
                 receiveShadow
                 geometry={nodes.Твердое_тело1001.geometry}
                 material={materials['Material.003']}

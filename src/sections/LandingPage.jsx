@@ -25,6 +25,7 @@ import HammerModel from "../components/Models/Hammer.jsx";
 import hammerStore from '../services/store.js'
 import { Audio, AudioLoader, AudioListener} from "three";
 import { Perf } from 'r3f-perf'
+import { useTransitionValue } from 'react-transition-value';
 import {useThree} from "@react-three/fiber";
 import Banner from "../components/Models/MedievalBanner.jsx";
 
@@ -51,8 +52,11 @@ const MonitorScene = ({screenBroken, medievalMode, setMedievalMode, onFocus, set
         <Monitor scale={[3, 3, 3]}
                  position={[3, -0.22, -0.1]}
                  rotation={[0, -1.55, 0]}
-                 onClick={monitorClick}
-                 escapePressed={escapePressed}
+                 onClick={() => {
+                     if(!screenBroken){
+                         monitorClick();
+                     }
+                 }}                 escapePressed={escapePressed}
                  medievalMode={medievalMode}
                  setMedievalMode={setMedievalMode}
                  screenBroken={screenBroken}
@@ -74,36 +78,39 @@ const MonitorScene = ({screenBroken, medievalMode, setMedievalMode, onFocus, set
     )
 };
 
-const Music = ( {musicRef} ) => {
-
-    let n = Math.floor(Math.random() * 8) + 1;
+const Music = ( {musicRef, medievalMode} ) => {
     let song = 0;
+    const [volumeTransition, setVolumeTransition] = useTransitionValue(0);
 
-    switch (n) {
-        case 1:
-            song = 0
-            break
-        case 2:
-            song = 96
-            break
-        case 3:
-            song = 290
-            break
-        case 4:
-            song = 451
-            break
-        case 5:
-            song = 527
-            break
-        case 6:
-            song = 562
-            break
-        case 7:
-            song = 857
-            break
-        case 8:
-            song = 1409
-            break
+    if(!medievalMode){
+        let n = Math.floor(Math.random() * 8) + 1;
+
+        switch (n) {
+            case 1:
+                song = 0
+                break
+            case 2:
+                song = 96
+                break
+            case 3:
+                song = 290
+                break
+            case 4:
+                song = 451
+                break
+            case 5:
+                song = 527
+                break
+            case 6:
+                song = 562
+                break
+            case 7:
+                song = 857
+                break
+            case 8:
+                song = 1409
+                break
+        }
     }
 
     useEffect(() => {
@@ -112,10 +119,19 @@ const Music = ( {musicRef} ) => {
             musicRef.current.currentTime = song;
         }
     }, []);
+
+
+    useEffect( () => {
+        if (musicRef.current) {
+            musicRef.current.load();
+        }
+    }, [medievalMode]);
+
+
     return (
         <>
             <audio id="audio" loop autoPlay={true} ref={musicRef}>
-                <source src="/assets/media/audio/ASillyPlaylist.mp3" type="audio/mpeg"/>
+                <source src={`${medievalMode ? "/assets/media/audio/MedievalSong.mp3" : "/assets/media/audio/ASillyPlaylist.mp3" }`} type="audio/mpeg"/>
             </audio>
         </>
     )
@@ -605,7 +621,7 @@ const LandingPage = ({setLoading, transition, setTransition}) => {
                     Press Escape or touch the blue led to exit!
                 </Alert>
             </Snackbar>
-            <Music musicRef={musicRef}/>
+            <Music musicRef={musicRef} medievalMode={medievalMode}/>
             <Canvas
                 className="w-full h-full absolute inset-0"
                 camera={{ position: [-0.37, 1, -0.1], fov: 40 }}
@@ -619,7 +635,7 @@ const LandingPage = ({setLoading, transition, setTransition}) => {
                     </>
                 )
                 }
-                <Perf/>
+                <Perf position="top-left"/>
                 <ambientLight intensity={0.06} color={"#FF954F"}/>
                 <EffectComposer>
                     <Bloom  intensity={0.5}      // strength of glow
