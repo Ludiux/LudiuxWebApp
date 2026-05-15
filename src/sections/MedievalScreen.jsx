@@ -23,7 +23,15 @@ const MedievalScreen = () => {
                     /> Lunas quedan para que El Dominio os reclame,  <br/>
                     y tengáis que enfrentaros al mismo... <br/>
                     <br/>
-
+                    Por otro lado... Seria injusto de mi parte no daros ninguna <br/>
+                    pistilla o una pequeña advertencia, verda? Pues si, <br/>
+                    y no es mi problema yo no soy ningun rey ni gobernante <br/>
+                    yo soy el amo de este dominio, y si tuviste las agallas <br/>
+                    para querer enfrentar mi desafio, tendreis que conseguir por <br/>
+                    cuenta propia lo que deseais, ahora que los caballeros forgen <br/>
+                    sus cuerpos hasta volverlos de acero; los magos entrenen su <br/>
+                    mente para resolver hasta el mas dificil de los problemas; <br/>
+                    q
                 </p>
             </div>
         </>
